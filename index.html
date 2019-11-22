@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Neighbourhood Crime</title>
+    <title>Neighbourhood Wise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+ 
+
 </head>
+
+
 <body>
-    <h1>Neighbourhood Crime</h1>
-    
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light navbar-style fixed-top">
+            <a href="index.html" class="logo navbar-brand"></a>
+
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="collapseMenu">
+
+                <ul class="navbar-nav menu-padding">
+                    <li class="active nav-item mr-2 home-icon"><a class="nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+
+                    <li id="search>" class="nav-item menu-nav-links text-uppercase"><a class="nav-link" href="#">Search </a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+        <main>
+             <div class="row">
+           
+                <div id="piechart" class="col-6 set-position">
+
+                </div>
+              <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
+                    <div id="map"></div>
+                </div>
+
+
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div id="callout-heading" class="color-callout text-center">
+                        164 Incidents in Sunbury for October 2019
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12">
+                </div>
+            </div>
+        </main>
+
+    </section>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
+
+ 
+        <script src="assets/js/main.js"></script>
+        <!-- Scripts to show Google Maps and to filter locations are in this file -->
+
+    <script src="assets/js/maps.js"></script>
 </body>
+
 </html>
