@@ -1,3 +1,15 @@
+
+
+checkUserInput();
+
+
+
+
+
+
+
+
+
 queue()
     .defer(d3.json, "assets/data/streetcrime.json")
     .await(makeGraphs);
@@ -19,6 +31,76 @@ function makeGraphs(error, transactionsData) {
 }
 
 
+
+var select = document.getElementById("select-area"),
+    arr = ["Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton"];
+for (var i = 0; i < arr.length; i++) {
+    var option = document.createElement("OPTION"),
+        txt = document.createTextNode(arr[i]);
+    option.appendChild(txt);
+    option.setAttribute("value", arr[i]);
+    select.insertBefore(option, select.lastChild);
+
+}
+
+var select = document.getElementById("select-month"),
+    arr = ["2019-09", "2019-08", "2019-07", "2019-06"];
+for (var i = 0; i < arr.length; i++) {
+    var option = document.createElement("OPTION"),
+        txt = document.createTextNode(arr[i]);
+    option.appendChild(txt);
+    option.setAttribute("value", arr[i]);
+    select.insertBefore(option, select.lastChild);
+
+}
+
+
+
+
+function getData(url, cb) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            cb(JSON.parse(this.responseText));
+
+
+        }
+    };
+
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+function writeToDocument(url) {
+    getData(url, function(data) {
+        for (var i = 0; i < data.length; i++) {
+            document.getElementById("data").innerHTML += `<p> ${data[i].name} </p>`;
+            console.dir(data);
+        }
+    });
+}
+
+
+function checkUserInput() {
+
+// If Stop and Search is clicked 
+
+    $("#stopandsearch-link").click(function() {
+
+ 
+
+        // Show Stop and Search bar charts
+
+        stopAndSearch();
+    });
+    
+    
+    function stopAndSearch() {
+
+ 
+   
+    
 queue()
     .defer(d3.json, "assets/data/stopandsearch.json")
     .await(makeBarGraphs);
@@ -70,52 +152,5 @@ function makeBarGraphs(error, transactionsData) {
 
     dc.renderAll();
 }
-
-var select = document.getElementById("select-area"),
-    arr = ["Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton"];
-for (var i = 0; i < arr.length; i++) {
-    var option = document.createElement("OPTION"),
-        txt = document.createTextNode(arr[i]);
-    option.appendChild(txt);
-    option.setAttribute("value", arr[i]);
-    select.insertBefore(option, select.lastChild);
-
 }
-
-var select = document.getElementById("select-month"),
-    arr = ["2019-09", "2019-08", "2019-07", "2019-06"];
-for (var i = 0; i < arr.length; i++) {
-    var option = document.createElement("OPTION"),
-        txt = document.createTextNode(arr[i]);
-    option.appendChild(txt);
-    option.setAttribute("value", arr[i]);
-    select.insertBefore(option, select.lastChild);
-
-}
-
-
-
-
-function getData(url, cb) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            cb(JSON.parse(this.responseText));
-
-
-        }
-    };
-
-    xhr.open("GET", url);
-    xhr.send();
-}
-
-function writeToDocument(url) {
-    getData(url, function(data) {
-        for (var i = 0; i < data.length; i++) {
-            document.getElementById("data").innerHTML += `<p> ${data[i].name} </p>`;
-            console.dir(data);
-        }
-    });
 }
