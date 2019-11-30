@@ -1,0 +1,102 @@
+
+
+
+/* Navigation bar style */
+
+.navbar-style {
+    background-color: #1b4080;
+    color: white;
+    font-size: 20px;
+}
+.navbar-blue{
+    height: 95px;
+    background-color: #1b4080;
+}
+
+
+
+/* Headings  */
+
+h2 {
+    text-align: center
+}
+
+
+.select-color {background-color: red;}
+
+.text-white{
+    color:white;
+}
+
+.piechart-style{
+    margin-top: 50px;
+}
+
+.map-style{
+    position: relative;
+    width: 400px;
+    height: 300px;
+}
+.color-map{
+    height: 400px;
+    background-color: lightblue;
+}
+
+
+.set-position {
+    top:0px;
+    position: relative;
+       }
+
+/* To make sure that on taller screens, the footer will always be at the bottom of the screen, set the height of the Gallery. */
+
+
+
+/* Border style around the various sections of the screen */
+.border-setting {
+    border: solid 1px #cfe0fc;
+}
+/* The style for the column the piecharts will appear in */
+.chart-box-style {
+    background-color: #cfe0fc;
+    color: #0e58d8;
+    height: 400px;
+}
+
+.barchart-box-style {
+       color: #0e58d8;
+    height: 300px;
+}
+
+/* This class will be attached to the div the svg appears in by dc.js. */
+
+.dc-chart {
+    width: 100%;
+}
+
+/*  The svg will be created by dc to hold the piechart. This sets its height and width so that it will be centered */
+
+svg {
+    height: 400px;
+    width: 100%;
+    position: relative;
+    /*   border: solid 1px #87b2f8; */
+}
+
+
+#barcharts.svg {
+    height: 300px;
+    width: 100%;
+    position: relative;
+    /*   border: solid 1px #87b2f8; */
+}
+.map-style {
+    border-left: solid 1px #cfe0fc;
+}
+
+
+#map {
+    max-width: 100%;
+    position: relative;
+    height: 400px;
+}

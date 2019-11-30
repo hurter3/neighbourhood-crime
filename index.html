@@ -10,67 +10,97 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
- 
 
-</head>
-
-
-<body>
-
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light navbar-style fixed-top">
-            <a href="index.html" class="logo navbar-brand"></a>
-
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu" aria-expanded="false" aria-label="toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-            <div class="collapse navbar-collapse" id="collapseMenu">
-
-                <ul class="navbar-nav menu-padding">
-                    <li class="active nav-item mr-2 home-icon"><a class="nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-
-                    <li id="search>" class="nav-item menu-nav-links text-uppercase"><a class="nav-link" href="#">Search </a></li>
-                </ul>
-            </div>
-
-        </nav>
-    </header>
-        <main>
-             <div class="row">
-           
-                <div id="piechart" class="col-6 set-position">
-
-                </div>
-              <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
-                    <div id="map"></div>
-                </div>
+    < /head>
 
 
-            </div>
-            <div class="row no-gutters">
-                <div class="col-12">
-                    <div id="callout-heading" class="color-callout text-center">
-                        164 Incidents in Sunbury for October 2019
+        <body>
+
+            <section class="container-fluid p-0">
+                <!--Nav-->
+                <nav class="navbar navbar-light navbar-expand-sm bg-light fixed-top">
+                    <div class="container">
+                        <a class="navbar-brand font-weight-bold" href="">
+                    Sunbury
+            </a>
+                        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="active nav-item mr-2"><a class="nav-link" href="">Home</a></li>
+                                <li class="nav-item mr-2"><a class="nav-link" href="#about">Explore map</a></li>
+                                <li class="nav-item mr-2"><a class="nav-link" href="#about">Stop & Search</a></li>
+                                <li class="nav-item mr-2"><a class="nav-link" data-toggle="modal" data-target="#ContactUsModal" href="/">Email</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-12">
-                </div>
-            </div>
-        </main>
+                </nav>
+                <!--Nav end-->
 
-    </section>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
+                <main>
+                    <div class="select-color">
+                        <select id="select-area">
+                                        <option value="default">Select Area</option>
+                                        </select>
+                        <select id="select-month">
+                            <option value="default" >Select Month</option>
+                        </select>
+                        <h2>Last month there were 91 incident in Sunbury</h2>
 
- 
-        <script src="assets/js/main.js"></script>
-        <!-- Scripts to show Google Maps and to filter locations are in this file -->
+                    </div>
 
-    <script src="assets/js/maps.js"></script>
-</body>
+
+                    <div class="row no-gutters set-position border-setting">
+                        <div class="col-12 col-md-4 col-lg-3 col-xl-2 p-0 chart-box-style text-center">
+                            <div class="row no-gutters">
+                                <div class="col-12 p-0">
+                                    <div id="piechart">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                    <div class="row container-fluid">
+                        <div class="bg-light">
+                            <div>
+                                <h3>Stop and Search per 'Gender'</h3>
+                                <div id="per-gender"></div>
+                            </div>
+
+                            <div>
+                                <h3>Stop and Search per 'Self defined ethnicity'</h3>
+                                <div id="per-ethnicity"></div>
+                            </div>
+
+                            <div>
+                                <h3>Stop and Search per 'Age range'</h3>
+                                <div id="per-age-range"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <button onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button>
+                        <!--                <button onclick="writeToDocument('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592')">Crime</button> -->
+                        <!--              <button onclick="writeToDocument('https://data.police.uk/api/stops-force?force=surrey')">Stop and Serch</button> -->
+                        <div id="data"></div>
+                    </div>
+
+                </main>
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+
+                <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
+
+                <script src="assets/js/main.js"></script>
+                <script src="assets/js/maps.js"></script>
+        </body>
 
 </html>
