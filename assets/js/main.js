@@ -24,8 +24,8 @@ function makeGraphs(error, transactionsData) {
           .height(480)
           .dimension(name_dim)
           .size(Infinity)
-          .showSections(false)
-          .columns(['category', 'location', 'id']);
+          .group(total_per_category)
+           .columns(['category', 'location', 'id']);
     
           
              dc.renderAll();
