@@ -2,19 +2,13 @@
 
 checkUserInput();
 
-
-
-
-
-
-
-
-
 queue()
     .defer(d3.json, "assets/data/streetcrime.json")
     .await(makeGraphs);
 
 function makeGraphs(error, transactionsData) {
+   
+
     var ndx = crossfilter(transactionsData);
     var name_dim = ndx.dimension(dc.pluck('category'));
     var total_per_category = name_dim.group().reduceCount();
@@ -25,11 +19,17 @@ function makeGraphs(error, transactionsData) {
         .dimension(name_dim)
         .group(total_per_category)
         .slicesCap(4);
-
-
-    dc.renderAll();
+        dc.dataTable('#table')
+          .width(300)
+          .height(480)
+          .dimension(name_dim)
+          .size(Infinity)
+          .showSections(false)
+          .columns(['category', 'location', 'id']);
+    
+          
+             dc.renderAll();
 }
-
 
 
 var select = document.getElementById("select-area"),
@@ -75,7 +75,7 @@ function getData(url, cb) {
 function writeToDocument(url) {
     getData(url, function(data) {
         for (var i = 0; i < data.length; i++) {
-            document.getElementById("data").innerHTML += `<p> ${data[i].name} </p>`;
+            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
             console.dir(data);
         }
     });
@@ -94,6 +94,17 @@ function checkUserInput() {
 
         stopAndSearch();
     });
+    
+    
+    
+     // If the Piechart is clicked on 
+
+    $("#piechart ").click(function() {
+
+        piechartSliceSelected();
+    });
+}
+    
     
     
     function stopAndSearch() {
@@ -153,4 +164,21 @@ function makeBarGraphs(error, transactionsData) {
     dc.renderAll();
 }
 }
+
+
+function piechartSliceSelected() {
+var pieSlices = [];    
+var sliceName = $(".pie-slice-group").children(".selected");
+
+console.log(sliceName);
+        // The name of the second class is the slice number ("-0", "-1", etc). 
+        // There may be more than one slice selected
+
+        for (var i = 0; i < sliceName.length; i++) {
+            
+            var selectedSlice = $(sliceName[i]).attr("textContent").split(" ");
+            pieSlices = pieSlices.concat(selectedSlice[1]);
+         console.log(pieSlices);
+
+        }
 }
