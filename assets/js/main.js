@@ -171,9 +171,7 @@ var pieSlices = [];
 var sliceName = $(".pie-slice-group").children(".selected");
 
 console.log(sliceName);
-        // The name of the second class is the slice number ("-0", "-1", etc). 
-        // There may be more than one slice selected
-
+        
         for (var i = 0; i < sliceName.length; i++) {
             
             var selectedSlice = $(sliceName[i]).attr("textContent").split(" ");
