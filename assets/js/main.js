@@ -7,29 +7,30 @@ queue()
     .await(makeGraphs);
 
 function makeGraphs(error, transactionsData) {
-   
-
+    
     var ndx = crossfilter(transactionsData);
     var name_dim = ndx.dimension(dc.pluck('category'));
     var total_per_category = name_dim.group().reduceCount();
-    dc.pieChart('#piechart')
+    dc.pieChart("#piechart")
         .height(350)
         .radius(100)
         .transitionDuration(1500)
         .dimension(name_dim)
         .group(total_per_category)
         .slicesCap(4);
-        dc.dataTable('#table')
-          .width(300)
-          .height(480)
-          .dimension(name_dim)
-          .size(Infinity)
-          .group(total_per_category)
-           .columns(['category', 'location', 'id']);
+//    dc.dataTable("#table")
+//        .width(300)
+//          .height(480)
+//          .dimension(name_dim)
+//          .size(Infinity)
+//          .group(total_per_category)
+//           .columns(['category','location','id']);
     
           
              dc.renderAll();
 }
+
+
 
 
 var select = document.getElementById("select-area"),
@@ -102,8 +103,10 @@ function checkUserInput() {
     $("#piechart ").click(function() {
 
         piechartSliceSelected();
+        
     });
 }
+
     
     
     
@@ -167,16 +170,23 @@ function makeBarGraphs(error, transactionsData) {
 
 
 function piechartSliceSelected() {
-var pieSlices = [];    
-var sliceName = $(".pie-slice-group").children(".selected");
+var pieSlices = [];
+var lastSlice;
+//let sliceName = $(".pie-slice-group").children(".selected");
 
-console.log(sliceName);
-        
-        for (var i = 0; i < sliceName.length; i++) {
-            
-            var selectedSlice = $(sliceName[i]).attr("textContent").split(" ");
-            pieSlices = pieSlices.concat(selectedSlice[1]);
-         console.log(pieSlices);
+// console.log(sliceName);
+// console.log(sliceName[0].textContent.split(": ")[0]);
 
-        }
+
+
+//        for (var i = 0; i < sliceName.length; i++) {
+//            lastSlice = sliceName;
+//            console.log(lastSlice);
+
+//        for (var i = 0; i < sliceName.length; i++) {
+//            var selectedSlice = $(sliceName[i]).attr("class").split(" ");
+//            pieSlices = pieSlices.concat(selectedSlice[i]);
+//         console.log(pieSlices);
+
+//        }
 }

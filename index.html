@@ -30,25 +30,30 @@
                             <ul class="navbar-nav ml-auto">
                                 <li class="active nav-item mr-2"><a class="nav-link" href="">Home</a></li>
                                 <li class="nav-item mr-2"><a class="nav-link" href="#about">Explore map</a></li>
-                                 <li id="stopandsearch-link" class="nav-item menu-nav-links mr2"><a class="nav-link" href="#">Stop & Search</a></li>
-                                 <li class="nav-item mr-2"><a class="nav-link" data-toggle="modal" data-target="#ContactUsModal" href="/">Email</a></li>
+                                <li id="stopandsearch-link" class="nav-item menu-nav-links mr2"><a class="nav-link" href="#">Stop & Search</a></li>
+                                <li class="nav-item mr-2"><a class="nav-link" data-toggle="modal" data-target="#ContactUsModal" href="/">Email</a></li>
                             </ul>
                         </div>
                     </div>
                 </nav>
                 <!--Nav end-->
-
                 <main>
-                    <div class="select-color">
-                        <select id="select-area">
-                                        <option value="default">Select Area</option>
-                                        </select>
-                        <select id="select-month">
-                            <option value="default" >Select Month</option>
-                        </select>
-                        <h2>Last month there were 91 incident in Sunbury</h2>
-
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="select-area">
+                                <select id="select-area">
+                                            <option value="default">Select Area</option>
+                                            </select>
+                                <select id="select-month">
+                                <option value="default" >Select Month</option>
+                            </select>
+                                <h2>Last month there were 91 incident in Sunbury</h2>
+                            </div>
+                        </div>
                     </div>
+
+
+
 
 
                     <div class="row no-gutters set-position border-setting">
@@ -56,6 +61,9 @@
                             <div class="row no-gutters">
                                 <div class="col-12 p-0">
                                     <div id="piechart">
+                                        <h5> Incident Categories</h5>
+                                        <div class="reset">selected: <span class="filter"></span>
+                                             </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,11 +73,8 @@
                             <div id="map"></div>
                         </div>
                     </div>
-                    <div class="row">
-      
-      </div>
-      <table id="table" class="table table-striped"></table>
-    </div>
+                  
+
                     <div class="row no-gutters">
                         <div class="bg-light">
                             <div>
@@ -96,9 +101,9 @@
                     </div>
 
                 </main>
-                
-                 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js "></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
+
+                <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js "></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
 
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
