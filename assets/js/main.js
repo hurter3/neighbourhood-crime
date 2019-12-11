@@ -1,35 +1,72 @@
 
-
 checkUserInput();
 
+var streetCrimeData;
+        
+
+loadJsonData('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592');
+
+function loadJsonData(url) {
+    getData(url, function(data) {
+    streetCrimeData = data;
+    console.log(streetCrimeData);
+        
+    });
+}
+
+function getData(url, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            cb(JSON.parse(this.responseText));
+        }
+    };
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+//.defer(d3.json, "assets/data/streetcrime.json")
+
 queue()
-    .defer(d3.json, "assets/data/streetcrime.json")
+    .defer(d3.json, streetCrimeData)
     .await(makeGraphs);
 
 function makeGraphs(error, transactionsData) {
-    
+    var chart= dc.pieChart("#piechart");
     var ndx = crossfilter(transactionsData);
     var name_dim = ndx.dimension(dc.pluck('category'));
     var total_per_category = name_dim.group().reduceCount();
-    dc.pieChart("#piechart")
-        .height(350)
+    chart.height(350)
         .radius(100)
         .transitionDuration(1500)
         .dimension(name_dim)
         .group(total_per_category)
-        .slicesCap(4);
-//    dc.dataTable("#table")
-//        .width(300)
-//          .height(480)
-//          .dimension(name_dim)
-//          .size(Infinity)
-//          .group(total_per_category)
-//           .columns(['category','location','id']);
-    
-          
+        .slicesCap(4)
+         .legend(dc.legend());
+      // example of formatting the legend via svg
+      // http://stackoverflow.com/questions/38430632/how-can-we-add-legends-value-beside-of-legend-with-proper-alignment
+//      chart.on('pretransition', function(chart) {
+//          chart.selectAll('.dc-legend-item text')
+//              .text('')
+//            .append('tspan')
+//              .text(function(d) { return d.name; })
+//            .append('tspan')
+// /             .attr('x', 100)
+//              .attr('text-anchor', 'end')
+//              .text(function(d) { return d.data; });
+
+//      });
              dc.renderAll();
 }
 
+function writeToDocument(url) {
+    getData(url, function(data) {
+        for (var i = 0; i < data.length; i++) {
+            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
+            console.dir(data);
+        }
+    });
+}
 
 
 
@@ -64,8 +101,6 @@ function getData(url, cb) {
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             cb(JSON.parse(this.responseText));
-
-
         }
     };
 
@@ -170,13 +205,59 @@ function makeBarGraphs(error, transactionsData) {
 
 
 function piechartSliceSelected() {
+    
+
+
+var selectedGroup = document.getElementById("selected-filter").innerText;
+console.log('selectedGroup');
+console.log(selectedGroup);
+
+var selectedFilter = $(".filter");
+console.log('selectedFilter');
+console.log(selectedFilter);
+console.log('selectedFilter[0].innerText.split(": ")[0]');
+console.log(selectedFilter[0].innerText.split(": ")[0]);
+
+
+}
+
+
+function CreateTableFromJSON() {
+    
+    var col = [];
+
+ var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < myBooks.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = myBooks[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    
+}
+
 var pieSlices = [];
 var lastSlice;
-//let sliceName = $(".pie-slice-group").children(".selected");
-
-// console.log(sliceName);
-// console.log(sliceName[0].textContent.split(": ")[0]);
-
 
 
 //        for (var i = 0; i < sliceName.length; i++) {
@@ -189,4 +270,3 @@ var lastSlice;
 //         console.log(pieSlices);
 
 //        }
-}
