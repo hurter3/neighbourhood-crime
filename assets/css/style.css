@@ -1,5 +1,9 @@
 
 
+.myTable, th, td {
+    border:1px solid black;
+}
+
 
 /* Navigation bar style */
 

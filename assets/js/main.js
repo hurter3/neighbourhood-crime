@@ -1,18 +1,18 @@
 
 checkUserInput();
 
-var streetCrimeData;
+//var streetCrimeData;
         
 
-loadJsonData('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592');
+//loadJsonData('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592');
 
-function loadJsonData(url) {
-    getData(url, function(data) {
-    streetCrimeData = data;
-    console.log(streetCrimeData);
+//function loadJsonData(url) {
+//    getData(url, function(data) {
+//    streetCrimeData = data;
+//    console.log(streetCrimeData);
         
-    });
-}
+//    });
+//}
 
 function getData(url, cb) {
     var xhr = new XMLHttpRequest();
@@ -26,9 +26,11 @@ function getData(url, cb) {
 }
 
 //.defer(d3.json, "assets/data/streetcrime.json")
+//.defer(d3.json, streetCrimeData)
+
 
 queue()
-    .defer(d3.json, streetCrimeData)
+    .defer(d3.json, "assets/data/streetcrime.json")
     .await(makeGraphs);
 
 function makeGraphs(error, transactionsData) {
@@ -222,42 +224,114 @@ console.log(selectedFilter[0].innerText.split(": ")[0]);
 }
 
 
-function CreateTableFromJSON() {
+$.getJSON("assets/data/streetcrime.json", function(json) {
+ var streetCrimeData = json;
+    console.log(streetCrimeData);
+    CreateTableFromJSON(streetCrimeData);
     
-    var col = [];
+});
 
- var table = document.createElement("table");
+function CreateTableFromJSON(streetCrimeData) {
+  
+  
+var x = document.createElement("TABLE");
+  x.setAttribute("id", "myTable");
+  x.setAttribute("class", "myTable");
+  document.getElementById("crimeTable").appendChild(x);
+
+  var y = document.createElement("TR");
+  y.setAttribute("id", "myTr0");
+  document.getElementById("myTable").appendChild(y);
+
+var z = document.createElement("TH");
+  var t = document.createTextNode("table header cell0");
+  z.appendChild(t);
+  document.getElementById("myTr0").appendChild(z);
+
+var z = document.createElement("TH");
+  var t = document.createTextNode("table header cell1");
+  z.appendChild(t);
+  document.getElementById("myTr0").appendChild(z);
+
+var z = document.createElement("TH");
+  var t = document.createTextNode("table header cell2");
+  z.appendChild(t);
+  document.getElementById("myTr0").appendChild(z);
+
+var y = document.createElement("TR");
+  y.setAttribute("id", "myTr1");
+  document.getElementById("myTable").appendChild(y);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell0");
+  z.appendChild(t);
+  document.getElementById("myTr1").appendChild(z);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell1");
+  z.appendChild(t);
+  document.getElementById("myTr1").appendChild(z);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell2");
+  z.appendChild(t);
+  document.getElementById("myTr1").appendChild(z);
+  
+  var y = document.createElement("TR");
+  y.setAttribute("id", "myTr2");
+  document.getElementById("myTable").appendChild(y);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell4");
+  z.appendChild(t);
+  document.getElementById("myTr2").appendChild(z);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell5");
+  z.appendChild(t);
+  document.getElementById("myTr2").appendChild(z);
+  
+  var z = document.createElement("TD");
+  var t = document.createTextNode("cell6");
+  z.appendChild(t);
+  document.getElementById("myTr2").appendChild(z);
+}  
+  
+    
+//      var col = [];
+
+// var table = document.createElement("table");
 
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
-        var tr = table.insertRow(-1);                   // TABLE ROW.
+//        var tr = table.insertRow(-1);                   // TABLE ROW.
 
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
-        }
+//        for (var i = 0; i < col.length; i++) {
+//            var th = document.createElement("th");      // TABLE HEADER.
+//            th.innerHTML = col[i];
+//            tr.appendChild(th);
+//        }
 
         // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < myBooks.length; i++) {
+//        for (var i = 0; i < streetCrimeData.length; i++) {
 
-            tr = table.insertRow(-1);
+//             tr = table.insertRow(-1);
 
-            for (var j = 0; j < col.length; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = myBooks[i][col[j]];
-            }
-        }
+//            for (var j = 0; j < col.length; j++) {
+//                var tabCell = tr.insertCell(-1);
+//                tabCell.innerHTML = streetCrimeData[i][col[j]];
+//            }
+//        }
 
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
+//        var divContainer = document.getElementById("crimeTable");
+//        divContainer.innerHTML = "";
+//        divContainer.appendChild(table);
     
-}
+//}
 
-var pieSlices = [];
-var lastSlice;
+//var pieSlices = [];
+//var lastSlice;
 
 
 //        for (var i = 0; i < sliceName.length; i++) {
@@ -270,3 +344,8 @@ var lastSlice;
 //         console.log(pieSlices);
 
 //        }
+
+
+
+
+
