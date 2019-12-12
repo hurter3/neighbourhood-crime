@@ -228,107 +228,108 @@ $.getJSON("assets/data/streetcrime.json", function(json) {
  var streetCrimeData = json;
     console.log(streetCrimeData);
     CreateTableFromJSON(streetCrimeData);
-    
 });
 
+
+  
+
 function CreateTableFromJSON(streetCrimeData) {
-  
-  
-var x = document.createElement("TABLE");
-  x.setAttribute("id", "myTable");
-  x.setAttribute("class", "myTable");
-  document.getElementById("crimeTable").appendChild(x);
+  // get the reference for the body
+//  var element = document.getElementById("crimeTable");
 
-  var y = document.createElement("TR");
-  y.setAttribute("id", "myTr0");
-  document.getElementById("myTable").appendChild(y);
+  // creates a <table> element and a <tbody> element
+  var tbl = document.createElement("table");
+  var tblBody = document.createElement("tbody");
 
-var z = document.createElement("TH");
-  var t = document.createTextNode("table header cell0");
-  z.appendChild(t);
-  document.getElementById("myTr0").appendChild(z);
+ // Create a <tr> and <th> element with headings.
 
-var z = document.createElement("TH");
-  var t = document.createTextNode("table header cell1");
-  z.appendChild(t);
-  document.getElementById("myTr0").appendChild(z);
+  var row = document.createElement("tr");
+  var cell = document.createElement("th");
+  var cellText = document.createTextNode("CATEGORY");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+  var cell = document.createElement("th");
+  var cellText = document.createTextNode("CRIME ID");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      var cell = document.createElement("th");
+  var cellText = document.createTextNode("LOCATION");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      var cell = document.createElement("th");
+      var cellText = document.createTextNode("LONGITUDE");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      var cell = document.createElement("th");
+      var cellText = document.createTextNode("LATITUDE");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      var cell = document.createElement("th");
+      var cellText = document.createTextNode("OUTCOME STATUS");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      
 
-var z = document.createElement("TH");
-  var t = document.createTextNode("table header cell2");
-  z.appendChild(t);
-  document.getElementById("myTr0").appendChild(z);
-
-var y = document.createElement("TR");
-  y.setAttribute("id", "myTr1");
-  document.getElementById("myTable").appendChild(y);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell0");
-  z.appendChild(t);
-  document.getElementById("myTr1").appendChild(z);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell1");
-  z.appendChild(t);
-  document.getElementById("myTr1").appendChild(z);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell2");
-  z.appendChild(t);
-  document.getElementById("myTr1").appendChild(z);
-  
-  var y = document.createElement("TR");
-  y.setAttribute("id", "myTr2");
-  document.getElementById("myTable").appendChild(y);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell4");
-  z.appendChild(t);
-  document.getElementById("myTr2").appendChild(z);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell5");
-  z.appendChild(t);
-  document.getElementById("myTr2").appendChild(z);
-  
-  var z = document.createElement("TD");
-  var t = document.createTextNode("cell6");
-  z.appendChild(t);
-  document.getElementById("myTr2").appendChild(z);
-}  
-  
+     tblBody.appendChild(row);
     
-//      var col = [];
+  // creating all cells
+  for (var i = 0; i < 20; i++) {
+    // creates a table row
+    var row = document.createElement("tr");
 
-// var table = document.createElement("table");
 
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode(streetCrimeData[i].category);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+            var cell = document.createElement("td");
+      var cellText = document.createTextNode(streetCrimeData[i].id);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+            var cell = document.createElement("td");
+      var cellText = document.createTextNode(streetCrimeData[i].location.street.name);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+        var cell = document.createElement("td");
+      var cellText = document.createTextNode(streetCrimeData[i].location.longitude);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+              var cell = document.createElement("td");
+      var cellText = document.createTextNode(streetCrimeData[i].location.latitude);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      var cell = document.createElement("td");
+      if (streetCrimeData[i].outcome_status===null) {
+          var cellText = document.createTextNode("still under investigation");
+      } else
+            var cellText = document.createTextNode(streetCrimeData[i].outcome_status);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+     
+      
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+  }
 
-//        var tr = table.insertRow(-1);                   // TABLE ROW.
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+  // appends <table> into <body>
+  document.getElementById("crimeTable").appendChild(tbl);
+//  element.appendChild(tbl);
+  // sets the border attribute of tbl to 2;
+  tbl.setAttribute("border", "2");
+}
 
-//        for (var i = 0; i < col.length; i++) {
-//            var th = document.createElement("th");      // TABLE HEADER.
-//            th.innerHTML = col[i];
-//            tr.appendChild(th);
-//        }
 
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-//        for (var i = 0; i < streetCrimeData.length; i++) {
 
-//             tr = table.insertRow(-1);
 
-//            for (var j = 0; j < col.length; j++) {
-//                var tabCell = tr.insertCell(-1);
-//                tabCell.innerHTML = streetCrimeData[i][col[j]];
-//            }
-//        }
 
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-//        var divContainer = document.getElementById("crimeTable");
-//        divContainer.innerHTML = "";
-//        divContainer.appendChild(table);
+
+
     
-//}
 
 //var pieSlices = [];
 //var lastSlice;
