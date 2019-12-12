@@ -1,6 +1,7 @@
 
 checkUserInput();
 
+
 //var streetCrimeData;
         
 
@@ -205,10 +206,17 @@ function makeBarGraphs(error, transactionsData) {
 }
 }
 
+//defualt category on initial build
+var pieSliceNone = "none";
+console.log(typeof(pieSliceNone));
+var splitCategoryArray = pieSliceNone.split(',');
+console.log(typeof(splitCategoryArray));
+console.log(splitCategoryArray);
+
 
 function piechartSliceSelected() {
     
-
+console.log("sliceselected function");
 
 var selectedGroup = document.getElementById("selected-filter").innerText;
 console.log('selectedGroup');
@@ -220,23 +228,30 @@ console.log(selectedFilter);
 console.log('selectedFilter[0].innerText.split(": ")[0]');
 console.log(selectedFilter[0].innerText.split(": ")[0]);
 
+//var splitCategoryArray = [];
+
 var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
 var splitCategoryArray = pieSliceCategories.split(',');
 console.log(splitCategoryArray);
 
-}
+
+
 
 
 $.getJSON("assets/data/streetcrime.json", function(json) {
  var streetCrimeData = json;
+    console.log("getjson");
+
     console.log(streetCrimeData);
-    CreateTableFromJSON(streetCrimeData);
-});
+    CreateTableFromJSON(splitCategoryArray,streetCrimeData);
+});  
 
+}
 
-  
-
-function CreateTableFromJSON(streetCrimeData) {
+function CreateTableFromJSON(splitCategoryArray,streetCrimeData) {
+ console.log("createTableFromJSON");
+ console.log(splitCategoryArray[0]);
+    if (splitCategoryArray[0] !== "none") {
   // get the reference for the body
 //  var element = document.getElementById("crimeTable");
 
@@ -274,9 +289,21 @@ function CreateTableFromJSON(streetCrimeData) {
       
 
      tblBody.appendChild(row);
-    
-  // creating all cells
-  for (var i = 0; i < 20; i++) {
+     console.log("trying to reference splitCategoryArray");
+     console.log(splitCategoryArray);
+     console.log(splitCategoryArray);
+//    }
+
+for (var c = 0; c < splitCategoryArray.length; c++) {
+   
+console.log("entering c loop");
+  for (var i = 0; i < streetCrimeData.length; i++) {
+  // creating all cells    
+  console.log("entering 1 loop");
+  console.log(splitCategoryArray[c]);
+  console.log(streetCrimeData[i].category);
+    if(splitCategoryArray[c] === streetCrimeData[i].category) {
+console.log("entering tr");        
     // creates a table row
     var row = document.createElement("tr");
 
@@ -285,6 +312,7 @@ function CreateTableFromJSON(streetCrimeData) {
       // node the contents of the <td>, and put the <td> at
       // the end of the table row
       var cell = document.createElement("td");
+      console.log("entering td");
       var cellText = document.createTextNode(streetCrimeData[i].category);
       cell.appendChild(cellText);
       row.appendChild(cell);
@@ -315,8 +343,10 @@ function CreateTableFromJSON(streetCrimeData) {
       
     // add the row to the end of the table body
     tblBody.appendChild(row);
+    console.log("entering appendchild");
   }
-
+  }
+}
   // put the <tbody> in the <table>
   tbl.appendChild(tblBody);
   // appends <table> into <body>
@@ -326,30 +356,11 @@ function CreateTableFromJSON(streetCrimeData) {
   tbl.setAttribute("border", "2");
 }
 
-
+}
 
 
 
 
 
     
-
-//var pieSlices = [];
-//var lastSlice;
-
-
-//        for (var i = 0; i < sliceName.length; i++) {
-//            lastSlice = sliceName;
-//            console.log(lastSlice);
-
-//        for (var i = 0; i < sliceName.length; i++) {
-//            var selectedSlice = $(sliceName[i]).attr("class").split(" ");
-//            pieSlices = pieSlices.concat(selectedSlice[i]);
-//         console.log(pieSlices);
-
-//        }
-
-
-
-
 
