@@ -139,7 +139,12 @@ function checkUserInput() {
      // If the Piechart is clicked on 
 
     $("#piechart ").click(function() {
+        
+        $(document).ready(function(){
+    $("table").empty();
+  });
 
+document.deleteElement("table");
         piechartSliceSelected();
         
     });
@@ -243,13 +248,22 @@ $.getJSON("assets/data/streetcrime.json", function(json) {
     console.log("getjson");
 
     console.log(streetCrimeData);
+    
+  
     CreateTableFromJSON(splitCategoryArray,streetCrimeData);
 });  
 
 }
 
 function CreateTableFromJSON(splitCategoryArray,streetCrimeData) {
- console.log("createTableFromJSON");
+
+
+//$(document).ready(function(){
+//    $("table").empty();
+//  });
+
+
+console.log("createTableFromJSON");
  console.log(splitCategoryArray[0]);
     if (splitCategoryArray[0] !== "none") {
   // get the reference for the body
