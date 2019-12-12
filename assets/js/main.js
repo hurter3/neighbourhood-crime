@@ -220,6 +220,9 @@ console.log(selectedFilter);
 console.log('selectedFilter[0].innerText.split(": ")[0]');
 console.log(selectedFilter[0].innerText.split(": ")[0]);
 
+var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
+var splitCategoryArray = pieSliceCategories.split(',');
+console.log(splitCategoryArray);
 
 }
 
