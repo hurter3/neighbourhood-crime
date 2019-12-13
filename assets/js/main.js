@@ -1,5 +1,6 @@
 checkUserInput();
 
+ 
 
 //var streetCrimeData;
 
@@ -69,6 +70,11 @@ function writeToDocument(url) {
     });
 }
 
+function clearDocument() {
+    $(document).ready(function() {
+            $("#data").empty();
+        });
+}
 
 
 var select = document.getElementById("select-area"),
@@ -109,14 +115,11 @@ function getData(url, cb) {
     xhr.send();
 }
 
-function writeToDocument(url) {
-    getData(url, function(data) {
-        for (var i = 0; i < data.length; i++) {
-            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
-            console.dir(data);
-        }
-    });
-}
+
+//    $(document).ready(function(){
+//  $(".btn1").hide();
+//  });
+
 
 
 function checkUserInput() {
@@ -156,6 +159,10 @@ function stopAndSearch() {
             $("article").empty();
         });
 
+$(document).ready(function(){
+  $(".btn1").hide();
+  });
+
     queue()
         .defer(d3.json, "assets/data/stopandsearch.json")
         .await(makeBarGraphs);
@@ -167,7 +174,7 @@ function stopAndSearch() {
         var total_per_gender = gender_dim.group().reduceCount();
         dc.barChart('#per-gender')
             .width(300)
-            .height(150)
+            .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_per_gender)
@@ -180,8 +187,8 @@ function stopAndSearch() {
         var store_dim = ndx.dimension(dc.pluck('self_defined_ethnicity'));
         var total_spend_per_store = store_dim.group().reduceCount();
         dc.barChart('#per-ethnicity')
-            .width(500)
-            .height(250)
+            .width(400)
+            .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_spend_per_store)
@@ -195,7 +202,7 @@ function stopAndSearch() {
         var total_per_age_range = state_dim.group().reduceCount();
         dc.barChart('#per-age-range')
             .width(800)
-            .height(150)
+            .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_per_age_range)

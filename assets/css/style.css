@@ -52,7 +52,6 @@ h2 {
     position: relative;
        }
 
-/* To make sure that on taller screens, the footer will always be at the bottom of the screen, set the height of the Gallery. */
 
 
 
@@ -103,4 +102,24 @@ svg {
     max-width: 100%;
     position: relative;
     height: 450px;
+}
+
+.chart {
+  display: inline-block;
+  height: 230;
+  margin-bottom: 20px;
+}
+
+.chart-gender {
+    width:230;
+    height:130;
+}
+
+.chart-ethnicity {
+    width:230;
+    height:130;
+}
+
+#charts {
+  padding: 10px 0;
 }
