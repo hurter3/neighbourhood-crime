@@ -144,7 +144,6 @@ function checkUserInput() {
     $("table").empty();
   });
 
-document.deleteElement("table");
         piechartSliceSelected();
         
     });
@@ -214,7 +213,7 @@ function makeBarGraphs(error, transactionsData) {
 //defualt category on initial build
 var pieSliceNone = "none";
 console.log(typeof(pieSliceNone));
-var splitCategoryArray = pieSliceNone.split(',');
+var splitCategoryArray = pieSliceNone.split(', ');
 console.log(typeof(splitCategoryArray));
 console.log(splitCategoryArray);
 
@@ -236,7 +235,7 @@ console.log(selectedFilter[0].innerText.split(": ")[0]);
 //var splitCategoryArray = [];
 
 var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
-var splitCategoryArray = pieSliceCategories.split(',');
+var splitCategoryArray = pieSliceCategories.split(', ');
 console.log(splitCategoryArray);
 
 
@@ -256,12 +255,6 @@ $.getJSON("assets/data/streetcrime.json", function(json) {
 }
 
 function CreateTableFromJSON(splitCategoryArray,streetCrimeData) {
-
-
-//$(document).ready(function(){
-//    $("table").empty();
-//  });
-
 
 console.log("createTableFromJSON");
  console.log(splitCategoryArray[0]);
@@ -308,16 +301,34 @@ console.log("createTableFromJSON");
      console.log(splitCategoryArray);
 //    }
 
+
+var locationsArray = "[";
+var locationsCount = 0;
+console.log("?????????????????" +locationsArray)
+
+
 for (var c = 0; c < splitCategoryArray.length; c++) {
-   
-console.log("entering c loop");
+var insertcounter = 0;   
+console.log("entering c loop     " + c);
   for (var i = 0; i < streetCrimeData.length; i++) {
   // creating all cells    
-  console.log("entering 1 loop");
+  console.log("entering IIII loop    " + i);
   console.log(splitCategoryArray[c]);
   console.log(streetCrimeData[i].category);
     if(splitCategoryArray[c] === streetCrimeData[i].category) {
-console.log("entering tr");        
+console.log("entering tr==================   " + insertcounter);   
+insertcounter = insertcounter+1;
+
+if (locationsCount===0) {
+locationsArray = locationsArray.concat("{ lat:" + streetCrimeData[i].location.latitude +",lng:" + streetCrimeData[i].location.longitude + "}");
+}
+
+else {
+locationsArray = locationsArray.concat(",{ lat:" + streetCrimeData[i].location.latitude +",lng:" + streetCrimeData[i].location.longitude + "}");
+};
+locationsCount = locationsCount +1;
+console.log(locationsArray);
+
     // creates a table row
     var row = document.createElement("tr");
 
@@ -358,9 +369,15 @@ console.log("entering tr");
     // add the row to the end of the table body
     tblBody.appendChild(row);
     console.log("entering appendchild");
+    
+    
   }
   }
 }
+
+locationsArray = locationsArray.concat("]");
+console.log(locationsArray);
+
   // put the <tbody> in the <table>
   tbl.appendChild(tblBody);
   // appends <table> into <body>
@@ -378,3 +395,79 @@ console.log("entering tr");
 
     
 
+
+
+var mapMarkers = [];
+var places, infoWindow;
+
+function initMap(locationsArray) {
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        zoomControl: true,
+    scaleControl: true,
+        center: {
+
+            // Sunbury
+            lat: 51.41870117,
+            lng: -0.41840180
+
+        },
+        disableDefaultUI: true
+    });
+
+    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    console.log("lllllllllllllooooooooocccccccccc" + locationsArray);
+    var locations = 
+    [{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
+ 
+
+    var markers = locations.map(function(location, i) {
+        return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+        });
+    });
+
+    var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+}
+
+
+function showOnMap(mapDetails, mapLocs, mapLabels, mapNames) {
+    
+       // This function returns all the markers into "markers" which is passed to MarkerClusterer to be clustered
+
+    var map = new google.maps.Map(document.getElementById("map"), mapDetails);
+
+    var mapMarkers = mapLocs.map(function(location, i) {
+        return new google.maps.Marker({
+            position: location,
+            label: mapLabels[i % mapLabels.length]
+        });
+        mapMarkers[i] = new google.maps.Marker({
+            position: mapLocs[i]
+        });
+    });
+
+
+    for (i = 0; i < mapLocs.length; i++) {
+
+        var markerName = mapNames[i].slice(0)
+
+        google.maps.event.addListener(mapMarkers[i], 'click', function() {
+
+            var marker = this;
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: markerName
+            });
+
+            infoWindow.open(map, marker);
+
+        });
+
+        // Add the marker to the map
+        mapMarkers[i].setMap(map);
+
+    }
+}
