@@ -54,28 +54,29 @@
 
 
 
+            <article>
 
+                <div class="row no-gutters set-position border-setting">
+                    <div class="col-12 col-md-4 col-lg-3 col-xl-2 p-0 chart-box-style text-center">
+                        <div class="row no-gutters">
+                            <div class="col-12 p-0">
+                                <div id="piechart">
+                                    <h5> Incident Categories</h5>
+                                    <div id="selected-filter">selected: <span class="filter"></span>
+                                    </div>
 
-            <div class="row no-gutters set-position border-setting">
-                <div class="col-12 col-md-4 col-lg-3 col-xl-2 p-0 chart-box-style text-center">
-                    <div class="row no-gutters">
-                        <div class="col-12 p-0">
-                            <div id="piechart">
-                                <h5> Incident Categories</h5>
-                                <div id="selected-filter">selected: <span class="filter"></span>
                                 </div>
 
                             </div>
-
                         </div>
+                    </div>
+
+                    <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
+                        <div id="map"></div>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
-                    <div id="map"></div>
-                </div>
-            </div>
-
+            </article>
             <div id="crimeTable"></div>
 
             <div id="data"></div>
@@ -99,7 +100,7 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <button onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button>
+                <button onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">List Categories</button>
                 <!--                <button onclick="writeToDocument('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592')">Crime</button> -->
                 <!--              <button onclick="writeToDocument('https://data.police.uk/api/stops-force?force=surrey')">Stop and Serch</button> -->
                 <div id="data"></div>
@@ -118,7 +119,7 @@
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
 
         <script src="assets/js/main.js"></script>
-<!--        <script src="assets/js/maps.js"></script>  -->
+        <!--        <script src="assets/js/maps.js"></script>  -->
 </body>
 
 </html>

@@ -38,11 +38,11 @@ h2 {
 
 .map-style{
     position: relative;
-    width: 400px;
+    width: 450px;
     height: 300px;
 }
 .color-map{
-    height: 400px;
+    height: 450px;
     background-color: lightblue;
 }
 
@@ -64,7 +64,7 @@ h2 {
 .chart-box-style {
     background-color: #cfe0fc;
     color: #0e58d8;
-    height: 400px;
+    height: 450px;
 }
 
 .barchart-box-style {
@@ -102,5 +102,5 @@ svg {
 #map {
     max-width: 100%;
     position: relative;
-    height: 400px;
+    height: 450px;
 }
