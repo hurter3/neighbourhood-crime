@@ -105,9 +105,7 @@ function showClearHideOtherButtons() {
   $(".btn4").hide();
   });
   
-    $(document).ready(function(){
-  $(".btn7").hide();
-  });
+  
     $(document).ready(function(){
   $(".btn9").hide();
   });
@@ -126,9 +124,6 @@ function hideClearShowOtherButtons() {
   });
      $(document).ready(function(){
   $(".btn4").show();
-  });
-       $(document).ready(function(){
-  $(".btn7").show();
   });
       $(document).ready(function(){
   $(".btn9").show();
@@ -218,6 +213,9 @@ function stopAndSearch() {
             $("article").empty();
         });
 
+showClearHideOtherButtons();
+
+
 $(document).ready(function(){
   $(".btn1").hide();
   });
@@ -243,24 +241,24 @@ $(document).ready(function(){
             .xAxisLabel("Gender")
             .yAxis().ticks(10);
 
-        var store_dim = ndx.dimension(dc.pluck('self_defined_ethnicity'));
-        var total_spend_per_store = store_dim.group().reduceCount();
+        var store_dim = ndx.dimension(dc.pluck('officer_defined_ethnicity'));
+        var total_per_ethnicity = store_dim.group().reduceCount();
         dc.barChart('#per-ethnicity')
             .width(400)
             .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
-            .group(total_spend_per_store)
+            .group(total_per_ethnicity)
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
-            .xAxisLabel("Store")
+            .xAxisLabel("Ethnicity")
             .yAxis().ticks(10);
 
-        var state_dim = ndx.dimension(dc.pluck('age_range'));
+        var state_dim = ndx.dimension(dc.pluck('outcome_linked_to_object_of_search'));
         var total_per_age_range = state_dim.group().reduceCount();
         dc.barChart('#per-age-range')
-            .width(800)
+            .width(300)
             .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
@@ -268,11 +266,14 @@ $(document).ready(function(){
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
-            .xAxisLabel("Age Range")
+            .xAxisLabel("Operation successfull")
             .yAxis().ticks(10);
 
         dc.renderAll();
     }
+     $(document).ready(function(){
+  $(".chartHeader").show();
+  });
 }
 
 //defualt category on initial build
@@ -284,6 +285,9 @@ console.log(splitCategoryArray);
 var locationsArray = [{ lat: 51.418049, lng: -0.431713 }];
    $(document).ready(function(){
        $(".btn1").hide();
+  });
+   $(document).ready(function(){
+  $(".chartHeader").hide();
   });
 
 

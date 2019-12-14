@@ -29,11 +29,11 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ml-auto">
                         <li class="active nav-item mr-2"><a class="nav-link" href="">Home</a></li>
-                      
+
                         <li id="stopandsearch-link" class="nav-item menu-nav-links mr2"><a class="nav-link" href="#">Stop & Search Charts</a></li>
                         <li id="police-link" class="nav-item menu-nav-links mr2"><a class="nav-link" href="https://data.police.uk" target="_blank">Data Source</a></li>
-                        
-                       
+
+
                     </ul>
                 </div>
             </div>
@@ -75,41 +75,41 @@
 
             </article>
             <div>
-            <button class="btn1 button clear" onclick="clearDocument()">Clear</button>
-            
-                <button class="btn2 button" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button>
-                <button class="btn3 button" onclick="writeToDocument('https://data.police.uk/api/forces')">Forces</button> 
-               <button class="btn4 button" onclick="writeToDocument(' https://data.police.uk/api/surrey/neighbourhoods')">Neighbourhoods</button> 
-               <button class="btn7 button" onclick="writeToDocument3('https://data.police.uk/api/forces/surrey')">Special Forces</button> 
-              
-               
-          
-                <button class="btn9 button9" onclick="writeToDocument3('https://data.police.uk/api/forces/surrey')">Place</button> 
-              
+                <button class="btn1 button clear" onclick="clearDocument()">Clear</button>
 
-</div>
-                <!--                <button onclick="writeToDocument('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592')">Crime</button> -->
-                <!--              <button onclick="writeToDocument('https://data.police.uk/api/stops-force?force=surrey')">Stop and Serch</button> -->
-                <div id="data"></div>
-             
-            <div id="crimeTable"></div>
-            <div id="barcharts">
-                <div class="bg-light">
-                    <div class="chart-gender span4">
-                        <!--                               <h3>Stop and Search per 'Gender'</h3> -->
-                        <div id="per-gender"></div>
-                    </div>
-                    <div class="chart-ethnicity">
-                        <!--                              <h3>Stop and Search per 'Self defined ethnicity'</h3> -->
-                        <div id="per-ethnicity"></div>
-                    </div>
-                </div>
-                <div class="chart-age">
-                    <!--                                <h3>Stop and Search per 'Age range'</h3> -->
-                    <div id="per-age-range"></div>
-                </div>
+                <button class="btn2 button" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button>
+                <button class="btn3 button" onclick="writeToDocument('https://data.police.uk/api/forces')">Forces</button>
+                <button class="btn4 button" onclick="writeToDocument(' https://data.police.uk/api/surrey/neighbourhoods')">Neighbourhoods</button>
+                <button class="btn9 button" onclick="writeToDocument3('https://data.police.uk/api/forces/surrey')">Special Forces</button>
+
+
+
             </div>
-           
+            <!--                <button onclick="writeToDocument('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592')">Crime</button> -->
+            <!--              <button onclick="writeToDocument('https://data.police.uk/api/stops-force?force=surrey')">Stop and Serch</button> -->
+            <div id="data"></div>
+
+            <div id="crimeTable"></div>
+
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3 bg-light chart-gender">
+
+                    <h3 class="chartHeader">Stop and Search per 'Gender'</h3>
+                    <div id="per-gender"></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3 bg-light chart-ethnicity">
+                    <h3 class="chartHeader">Stop and Search per 'Officer defined Ethnicity'</h3>
+                    <div id="per-ethnicity"></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3 bg-light chart-age">
+                    <h3 class="chartHeader">Stop and Search Success</h3>
+                    <div id="per-age-range"></div>
+
+                </div>
+
+
+            </div>
+
         </main>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js "></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
@@ -121,4 +121,5 @@
         <script src="assets/js/main.js"></script>
         <!--        <script src="assets/js/maps.js"></script>  -->
 </body>
+
 </html>

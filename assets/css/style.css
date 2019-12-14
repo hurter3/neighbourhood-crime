@@ -89,9 +89,9 @@ svg {
 
 #barcharts.svg {
     height: 300px;
-    width: 100%;
+    width: 50%;
     position: relative;
-    /*   border: solid 1px #87b2f8; */
+    border: solid 1px #87b2f8; 
 }
 .map-style {
     border-left: solid 1px #cfe0fc;
