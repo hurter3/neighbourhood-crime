@@ -75,7 +75,7 @@ function writeToDocument3(url) {
     getData(url, function(data) {
         for (var i = 0; i < data.length; i++) {
             console.log(data);
-            document.getElementById("data").innerHTML += `${data[i].description}`;
+            document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
              }
          });
         showClearHideOtherButtons();
@@ -178,9 +178,6 @@ function getData(url, cb) {
 }
 
 
-//    $(document).ready(function(){
-//  $(".btn1").hide();
-//  });
 
 
 
@@ -364,6 +361,10 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
         var cellText = document.createTextNode("OUTCOME STATUS");
         cell.appendChild(cellText);
         row.appendChild(cell);
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("PERSISTENT ID");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
 
 
         tblBody.appendChild(row);
@@ -429,11 +430,11 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
                     cell.appendChild(cellText);
                     row.appendChild(cell);
                     var cell = document.createElement("td");
-                    if (streetCrimeData[i].outcome_status === null) {
-                        var cellText = document.createTextNode("still under investigation");
-                    }
-                    else
-                        var cellText = document.createTextNode(streetCrimeData[i].outcome_status);
+                    var cellText = document.createTextNode("still under investigation");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    var cell = document.createElement("td");
+                    var cellText = document.createTextNode(streetCrimeData[i].persistent_id);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
 
@@ -488,11 +489,11 @@ function initMap() {
         disableDefaultUI: true
     });
 
- //   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var locations = [{ lat: 51.41870117, lng: -0.41840180 }];
     console.log("locationsArray===============>>>>>>>>> " + typeof(locationsArray));
-  var locations = 
- [{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
+//  var locations = 
+// [{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
 
 
     var markers = locations.map(function(location, i) {
