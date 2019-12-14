@@ -66,15 +66,20 @@ function writeToDocument(url) {
     getData(url, function(data) {
         for (var i = 0; i < data.length; i++) {
             document.getElementById("data").innerHTML += `${data[i].name} <br>`;
-        }
-    });
-       $(document).ready(function(){
-  $(".btn2").hide();
-  });
-      $(document).ready(function(){
-  $(".btn1").show();
-  });
-}
+             }
+         });
+        showClearHideOtherButtons();
+};
+
+function writeToDocument3(url) {
+    getData(url, function(data) {
+        for (var i = 0; i < data.length; i++) {
+            console.log(data);
+            document.getElementById("data").innerHTML += `${data[i].description}`;
+             }
+         });
+        showClearHideOtherButtons();
+};
 
 function clearDocument() {
     $(document).ready(function() {
@@ -83,13 +88,55 @@ function clearDocument() {
          $(document).ready(function() {
             $("#crimeTable").empty();
         });
-           $(document).ready(function(){
-  $(".btn1").hide();
+        hideClearShowOtherButtons()
+}
+
+function showClearHideOtherButtons() {
+          $(document).ready(function(){
+  $(".btn1").show();
+  });
+       $(document).ready(function(){
+  $(".btn2").hide();
+  });
+       $(document).ready(function(){
+  $(".btn3").hide();
+  });
+       $(document).ready(function(){
+  $(".btn4").hide();
+  });
+  
+    $(document).ready(function(){
+  $(".btn7").hide();
   });
     $(document).ready(function(){
-  $(".btn2").show();
+  $(".btn9").hide();
   });
 }
+
+
+function hideClearShowOtherButtons() {
+          $(document).ready(function(){
+  $(".btn1").hide();
+  });
+       $(document).ready(function(){
+  $(".btn2").show();
+  });
+       $(document).ready(function(){
+  $(".btn3").show();
+  });
+     $(document).ready(function(){
+  $(".btn4").show();
+  });
+       $(document).ready(function(){
+  $(".btn7").show();
+  });
+      $(document).ready(function(){
+  $(".btn9").show();
+  });
+}
+
+
+
 
 
 var select = document.getElementById("select-area"),
@@ -266,7 +313,6 @@ function piechartSliceSelected() {
 
 
 
-
     $.getJSON("assets/data/streetcrime.json", function(json) {
         var streetCrimeData = json;
         console.log("getjson");
@@ -399,12 +445,7 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
                 }
             }
-                   $(document).ready(function(){
-  $(".btn2").hide();
-  });
-      $(document).ready(function(){
-  $(".btn1").show();
-  });
+        showClearHideOtherButtons();
         }
 
         locationsArray = locationsArray.concat("]");

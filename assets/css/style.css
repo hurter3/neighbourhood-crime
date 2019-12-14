@@ -124,10 +124,40 @@ svg {
   padding: 10px 0;
 }
 
+
 .button {
+  background-color:#e6e6ff ;
+  border: none;
+  color: black;
+  padding: 40px 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  
+}
+
+.button9 {
+  background-color:#e6e6ff ;
+  border: none;
+  color: black;
+  padding: 40px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  
+}
+.clear { padding: 10px 16px;
+}
+
+
+#button {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
    color: #0e58d8;
+   width:100px;
+   height:30px;
 }
 
 .button:hover {
@@ -135,3 +165,4 @@ svg {
   color: white;
  
 }
+
