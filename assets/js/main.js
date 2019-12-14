@@ -68,12 +68,27 @@ function writeToDocument(url) {
             document.getElementById("data").innerHTML += `${data[i].name} <br>`;
         }
     });
+       $(document).ready(function(){
+  $(".btn2").hide();
+  });
+      $(document).ready(function(){
+  $(".btn1").show();
+  });
 }
 
 function clearDocument() {
     $(document).ready(function() {
             $("#data").empty();
         });
+         $(document).ready(function() {
+            $("#crimeTable").empty();
+        });
+           $(document).ready(function(){
+  $(".btn1").hide();
+  });
+    $(document).ready(function(){
+  $(".btn2").show();
+  });
 }
 
 
@@ -223,6 +238,9 @@ var splitCategoryArray = pieSliceNone.split(', ');
 console.log(typeof(splitCategoryArray));
 console.log(splitCategoryArray);
 var locationsArray = [{ lat: 51.418049, lng: -0.431713 }];
+   $(document).ready(function(){
+       $(".btn1").hide();
+  });
 
 
 function piechartSliceSelected() {
@@ -381,6 +399,12 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
                 }
             }
+                   $(document).ready(function(){
+  $(".btn2").hide();
+  });
+      $(document).ready(function(){
+  $(".btn1").show();
+  });
         }
 
         locationsArray = locationsArray.concat("]");
@@ -423,11 +447,11 @@ function initMap() {
         disableDefaultUI: true
     });
 
-    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+ //   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var locations = [{ lat: 51.41870117, lng: -0.41840180 }];
     console.log("locationsArray===============>>>>>>>>> " + typeof(locationsArray));
-    //var locations = 
-    //[{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
+  var locations = 
+ [{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
 
 
     var markers = locations.map(function(location, i) {

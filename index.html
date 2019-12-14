@@ -72,41 +72,42 @@
                 </div>
 
             </article>
-            <div id="crimeTable"></div>
-
-                    <div id="barcharts">
-                             
-
-                    <div class="bg-light">
-                        <div class="chart-gender span4">
-                            <!--                               <h3>Stop and Search per 'Gender'</h3> -->
-                            <div id="per-gender"></div>
-                        </div>
-
-
-                        <div class="chart-ethnicity">
-                            <!--                              <h3>Stop and Search per 'Self defined ethnicity'</h3> -->
-                            <div id="per-ethnicity"></div>
-                        </div>
-                </div>
-                
-                    <div class="chart-age">
-                        <!--                                <h3>Stop and Search per 'Age range'</h3> -->
-                        <div id="per-age-range"></div>
-                    </div>
+            <div><button class="btn1 button" onclick="clearDocument()">Clear</button>
             
-            </div>
+                <button class="btn2" button" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">List Categories</button>
+</div>
 
-
-            <div class="container-fluid">
-                           <button class="btn1" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">List Categories</button>
-             <button class="btn2" onclick="clearDocument()">Clear</button>
-                
                 <!--                <button onclick="writeToDocument('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592')">Crime</button> -->
                 <!--              <button onclick="writeToDocument('https://data.police.uk/api/stops-force?force=surrey')">Stop and Serch</button> -->
                 <div id="data"></div>
+             
+            <div id="crimeTable"></div>
+
+            <div id="barcharts">
+
+
+                <div class="bg-light">
+                    <div class="chart-gender span4">
+                        <!--                               <h3>Stop and Search per 'Gender'</h3> -->
+                        <div id="per-gender"></div>
+                    </div>
+
+
+                    <div class="chart-ethnicity">
+                        <!--                              <h3>Stop and Search per 'Self defined ethnicity'</h3> -->
+                        <div id="per-ethnicity"></div>
+                    </div>
+                </div>
+
+                <div class="chart-age">
+                    <!--                                <h3>Stop and Search per 'Age range'</h3> -->
+                    <div id="per-age-range"></div>
+                </div>
+
             </div>
 
+
+           
         </main>
 
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js "></script>

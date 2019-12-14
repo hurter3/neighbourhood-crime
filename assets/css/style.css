@@ -80,7 +80,7 @@ h2 {
 /*  The svg will be created by dc to hold the piechart. This sets its height and width so that it will be centered */
 
 svg {
-    height: 400px;
+    height: 350px;
     width: 100%;
     position: relative;
     /*   border: solid 1px #87b2f8; */
@@ -122,4 +122,16 @@ svg {
 
 #charts {
   padding: 10px 0;
+}
+
+.button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+   color: #0e58d8;
+}
+
+.button:hover {
+  background-color: lightblue; /* Green */
+  color: white;
+ 
 }
