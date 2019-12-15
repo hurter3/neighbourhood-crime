@@ -1,20 +1,5 @@
 checkUserInput();
 
- 
-
-//var streetCrimeData;
-
-
-//loadJsonData('https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592');
-
-//function loadJsonData(url) {
-//    getData(url, function(data) {
-//    streetCrimeData = data;
-//    console.log(streetCrimeData);
-
-//    });
-//}
-
 function getData(url, cb) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -74,8 +59,7 @@ function writeToDocument(url) {
 function writeToDocument3(url) {
     getData(url, function(data) {
         for (var i = 0; i < data.length; i++) {
-            console.log(data);
-            document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
+           document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
              }
          });
         showClearHideOtherButtons();
@@ -278,10 +262,10 @@ $(document).ready(function(){
 
 //defualt category on initial build
 var pieSliceNone = "none";
-console.log(typeof(pieSliceNone));
+
 var splitCategoryArray = pieSliceNone.split(', ');
-console.log(typeof(splitCategoryArray));
-console.log(splitCategoryArray);
+
+
 var locationsArray = [{ lat: 51.418049, lng: -0.431713 }];
    $(document).ready(function(){
        $(".btn1").hide();
@@ -293,32 +277,21 @@ var locationsArray = [{ lat: 51.418049, lng: -0.431713 }];
 
 function piechartSliceSelected() {
 
-    console.log("sliceselected function");
+
 
     var selectedGroup = document.getElementById("selected-filter").innerText;
-    console.log('selectedGroup');
-    console.log(selectedGroup);
-
     var selectedFilter = $(".filter");
-    console.log('selectedFilter');
-    console.log(selectedFilter);
-    console.log('selectedFilter[0].innerText.split(": ")[0]');
-    console.log(selectedFilter[0].innerText.split(": ")[0]);
-
-    //var splitCategoryArray = [];
-
     var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
     var splitCategoryArray = pieSliceCategories.split(', ');
-    console.log(splitCategoryArray);
 
 
 
 
     $.getJSON("assets/data/streetcrime.json", function(json) {
         var streetCrimeData = json;
-        console.log("getjson");
+        
 
-        console.log(streetCrimeData);
+    
 
 
         CreateTableFromJSON(splitCategoryArray, streetCrimeData);
@@ -328,8 +301,6 @@ function piechartSliceSelected() {
 
 function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
-    console.log("createTableFromJSON");
-    console.log(splitCategoryArray[0]);
     if (splitCategoryArray[0] !== "none") {
         // get the reference for the body
         //  var element = document.getElementById("crimeTable");
@@ -372,27 +343,23 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
 
         tblBody.appendChild(row);
-        console.log("trying to reference splitCategoryArray");
-        console.log(splitCategoryArray);
-        console.log(splitCategoryArray);
-        //    }
+       
 
 
         var locationsArray = "[";
         var locationsCount = 0;
-        console.log("?????????????????" + locationsArray)
+      
 
 
         for (var c = 0; c < splitCategoryArray.length; c++) {
             var insertcounter = 0;
-            console.log("entering c loop     " + c);
+            
             for (var i = 0; i < streetCrimeData.length; i++) {
                 // creating all cells    
-                console.log("entering IIII loop    " + i);
-                console.log(splitCategoryArray[c]);
-                console.log(streetCrimeData[i].category);
+               
+               
                 if (splitCategoryArray[c] === streetCrimeData[i].category) {
-                    console.log("entering tr==================   " + insertcounter);
+                   
                     insertcounter = insertcounter + 1;
 
                     if (locationsCount === 0) {
@@ -403,7 +370,7 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
                         locationsArray = locationsArray.concat(",{ lat:" + streetCrimeData[i].location.latitude + ",lng:" + streetCrimeData[i].location.longitude + "}");
                     };
                     locationsCount = locationsCount + 1;
-                    console.log(locationsArray);
+                   
 
                     // creates a table row
                     var row = document.createElement("tr");
@@ -413,7 +380,7 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
                     // node the contents of the <td>, and put the <td> at
                     // the end of the table row
                     var cell = document.createElement("td");
-                    console.log("entering td");
+                   
                     var cellText = document.createTextNode(streetCrimeData[i].category);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
@@ -445,7 +412,7 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
                     // add the row to the end of the table body
                     tblBody.appendChild(row);
-                    console.log("entering appendchild");
+                  
 
 
                 }
@@ -454,7 +421,7 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
         }
 
         locationsArray = locationsArray.concat("]");
-        console.log(locationsArray);
+     
 
         // put the <tbody> in the <table>
         tbl.appendChild(tblBody);
@@ -495,11 +462,7 @@ function initMap() {
 
    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var locations = [{ lat: 51.41870117, lng: -0.41840180 }];
-    console.log("locationsArray===============>>>>>>>>> " + typeof(locationsArray));
-//  var locations = 
-// [{ lat:51.418049,lng:-0.431713},{ lat:51.421859,lng:-0.440270},{ lat:51.419718,lng:-0.410112},{ lat:51.422195,lng:-0.419015},{ lat:51.407875,lng:-0.432766},{ lat:51.425015,lng:-0.432122},{ lat:51.423491,lng:-0.415748},{ lat:51.417734,lng:-0.418277},{ lat:51.424624,lng:-0.429158},{ lat:51.423450,lng:-0.439554},{ lat:51.422913,lng:-0.435703},{ lat:51.416966,lng:-0.414723},{ lat:51.425224,lng:-0.438357},{ lat:51.415525,lng:-0.433252},{ lat:51.421046,lng:-0.428547},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.419635,lng:-0.415910},{ lat:51.425618,lng:-0.421457},{ lat:51.423491,lng:-0.415748},{ lat:51.415525,lng:-0.433252}];
-
-
+   
     var markers = locations.map(function(location, i) {
         return new google.maps.Marker({
             position: location,
@@ -553,8 +516,7 @@ function showOnMap(mapDetails, mapLocs, mapLabels, mapNames) {
 
 
 function showMarkersOnMap(locationsArray,splitCategoryArray) {
-console.log(splitCategoryArray);
-console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + locationsArray);
+
 
 var lastSelection;
 for (i=0;i<splitCategoryArray.length;i++){
