@@ -257,7 +257,7 @@ $(document).ready(function(){
 
         var state_dim = ndx.dimension(dc.pluck('outcome_linked_to_object_of_search'));
         var total_per_age_range = state_dim.group().reduceCount();
-        dc.barChart('#per-age-range')
+        dc.barChart('#per-success')
             .width(300)
             .height(200)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
