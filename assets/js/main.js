@@ -11,8 +11,6 @@ function getData(url, cb) {
     xhr.send();
 }
 
-//.defer(d3.json, "assets/data/streetcrime.json")
-//.defer(d3.json, streetCrimeData)
 
 
 queue()
@@ -31,19 +29,7 @@ function makeGraphs(error, transactionsData) {
         .group(total_per_category)
         .slicesCap(4)
         .legend(dc.legend());
-    // example of formatting the legend via svg
-    // http://stackoverflow.com/questions/38430632/how-can-we-add-legends-value-beside-of-legend-with-proper-alignment
-    //      chart.on('pretransition', function(chart) {
-    //          chart.selectAll('.dc-legend-item text')
-    //              .text('')
-    //            .append('tspan')
-    //              .text(function(d) { return d.name; })
-    //            .append('tspan')
-    // /             .attr('x', 100)
-    //              .attr('text-anchor', 'end')
-    //              .text(function(d) { return d.data; });
 
-    //      });
     dc.renderAll();
 }
 
@@ -302,8 +288,6 @@ function piechartSliceSelected() {
 function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
     if (splitCategoryArray[0] !== "none") {
-        // get the reference for the body
-        //  var element = document.getElementById("crimeTable");
 
         // creates a <table> element and a <tbody> element
         var tbl = document.createElement("table");
