@@ -1,24 +1,5 @@
 
 
-.myTable, th, td {
-    border:1px solid black;
-}
-
-
-/* Navigation bar style */
-
-.navbar-style {
-    background-color: #1b4080;
-    color: white;
-    font-size: 20px;
-}
-.navbar-blue{
-    height: 95px;
-    background-color: #1b4080;
-}
-
-
-
 /* Headings  */
 
 h2 {
@@ -26,24 +7,39 @@ h2 {
 }
 
 
-.select-color {background-color: red;}
+/* PieChart style */
 
-.text-white{
-    color:white;
+
+.chart-box-style {
+    background-color: #cfe0fc;
+    color: #0e58d8;
+    height: 450px;
 }
 
-.piechart-style{
-    margin-top: 50px;
+/* Border style  */
+.border-setting {
+    border: solid 1px #cfe0fc;
 }
+
+
+/* Map area style */
+
 
 .map-style{
     position: relative;
     width: 450px;
     height: 300px;
 }
-.color-map{
+
+#map-style {
+    border-left: solid 1px #cfe0fc;
+}
+
+
+#map {
+    max-width: 100%;
+    position: relative;
     height: 450px;
-    background-color: lightblue;
 }
 
 
@@ -54,30 +50,12 @@ h2 {
 
 
 
+/* Table area style */
 
-/* Border style around the various sections of the screen */
-.border-setting {
-    border: solid 1px #cfe0fc;
-}
-/* The style for the column the piecharts will appear in */
-.chart-box-style {
-    background-color: #cfe0fc;
-    color: #0e58d8;
-    height: 450px;
+.myTable, th, td {
+    border:1px solid black;
 }
 
-.barchart-box-style {
-       color: #0e58d8;
-    height: 300px;
-}
-
-/* This class will be attached to the div the svg appears in by dc.js. */
-
-.dc-chart {
-    width: 100%;
-}
-
-/*  The svg will be created by dc to hold the piechart. This sets its height and width so that it will be centered */
 
 svg {
     height: 350px;
@@ -93,22 +71,7 @@ svg {
     position: relative;
     border: solid 1px #87b2f8; 
 }
-.map-style {
-    border-left: solid 1px #cfe0fc;
-}
 
-
-#map {
-    max-width: 100%;
-    position: relative;
-    height: 450px;
-}
-
-.chart {
-  display: inline-block;
-  height: 230;
-  margin-bottom: 20px;
-}
 
 .chart-gender {
     width:230;
@@ -120,9 +83,8 @@ svg {
     height:130;
 }
 
-#charts {
-  padding: 10px 0;
-}
+
+/* Button style  */
 
 
 .button {
@@ -151,14 +113,6 @@ svg {
 .clear { padding: 10px 16px;
 }
 
-
-#button {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-   color: #0e58d8;
-   width:100px;
-   height:30px;
-}
 
 .button:hover {
   background-color: lightblue; /* Green */
