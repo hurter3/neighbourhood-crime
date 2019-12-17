@@ -16,9 +16,9 @@ function initMap() {
         disableDefaultUI: true
     });
 
-   var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var locations = [{ lat: 51.41870117, lng: -0.41840180 }];
-   
+
     var markers = locations.map(function(location, i) {
         return new google.maps.Marker({
             position: location,
@@ -35,20 +35,23 @@ function initMap() {
 
 function buildMarkersArray(splitCategoryArray, streetCrimeData) {
 
-let locationArray = [];
+    let locationArray = [];
+    let mapNames = [];
 
-        for (var c = 0; c < splitCategoryArray.length; c++) {
+    for (var c = 0; c < splitCategoryArray.length; c++) {
 
-            for (var i = 0; i < streetCrimeData.length; i++) {
-                if (streetCrimeData[i].category === splitCategoryArray[c] ) {
-                     locationArray.push(new google.maps.LatLng(streetCrimeData[i].location.latitude, streetCrimeData[i].location.longitude));
-                     
-                    
-                }
+        for (var i = 0; i < streetCrimeData.length; i++) {
+            if (streetCrimeData[i].category === splitCategoryArray[c]) {
+                locationArray.push(new google.maps.LatLng(streetCrimeData[i].location.latitude, streetCrimeData[i].location.longitude));
+                mapNames.push(streetCrimeData[i].location.street.name);
+
+            }
         }
         console.log(locationArray);
         console.log(typeof(locationArray));
-        }
+        console.log(mapNames);
+        console.log(typeof(mapNames));
+    }
 
 
     var mapLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -56,7 +59,7 @@ let locationArray = [];
     // The map names will appear in the infowindow of the markers. I couldn't work out how to get the names from the 
     // google api, so I created my own solution to make the names appear in the marker infoWindow (see showOnMap in maps.js)
 
-    var mapNames = [];
+    //  var mapNames = [];
 
     var mapDetails = {
         center: {
@@ -73,9 +76,9 @@ let locationArray = [];
 
 
 function showOnMap(mapDetails, mapLocs, mapLabels, mapNames) {
-console.log("within showOnMap");
-console.log(mapLocs);
-console.log(typeof(mapLocs));
+    console.log("within showOnMap");
+    console.log(mapLocs);
+    console.log(typeof(mapLocs));
     // This function returns all the markers into "markers" which is passed to MarkerClusterer to be clustered
 
     var map = new google.maps.Map(document.getElementById("map"), mapDetails);
@@ -83,34 +86,16 @@ console.log(typeof(mapLocs));
     var markers = mapLocs.map(function(location, i) {
         return new google.maps.Marker({
             position: location,
-            label: mapLabels[i % mapLabels.length]
+            label: mapLabels[i % mapLabels.length],
+            title: mapNames[i]
         });
-        markers[i] = new google.maps.Marker({
-            position: mapLocs[i]
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
         });
+
     });
 
 
-    for (i = 0; i < mapLocs.length; i++) {
-
-        //        var markerName = mapNames[i].slice(0)
-
-        google.maps.event.addListener(markers[i], 'click', function() {
-
-            var markes = this;
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: markerName
-            });
-
-            infoWindow.open(map, marker);
-
-        });
-
-        // Add the marker to the map
-        markers[i].setMap(map);
-
-    }
     var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
 }
