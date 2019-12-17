@@ -36,12 +36,15 @@ function initMap() {
 function buildMarkersArray(splitCategoryArray, streetCrimeData) {
 
 let locationArray = [];
+
         for (var c = 0; c < splitCategoryArray.length; c++) {
 
             for (var i = 0; i < streetCrimeData.length; i++) {
                 if (streetCrimeData[i].category === splitCategoryArray[c] ) {
                      locationArray.push(new google.maps.LatLng(streetCrimeData[i].location.latitude, streetCrimeData[i].location.longitude));
-                    }
+                     
+                    
+                }
         }
         console.log(locationArray);
         console.log(typeof(locationArray));
@@ -77,12 +80,12 @@ console.log(typeof(mapLocs));
 
     var map = new google.maps.Map(document.getElementById("map"), mapDetails);
 
-    var mapMarkers = mapLocs.map(function(location, i) {
+    var markers = mapLocs.map(function(location, i) {
         return new google.maps.Marker({
             position: location,
             label: mapLabels[i % mapLabels.length]
         });
-        mapMarkers[i] = new google.maps.Marker({
+        markers[i] = new google.maps.Marker({
             position: mapLocs[i]
         });
     });
@@ -92,9 +95,9 @@ console.log(typeof(mapLocs));
 
         //        var markerName = mapNames[i].slice(0)
 
-        google.maps.event.addListener(mapMarkers[i], 'click', function() {
+        google.maps.event.addListener(markers[i], 'click', function() {
 
-            var marker = this;
+            var markes = this;
 
             var infoWindow = new google.maps.InfoWindow({
                 content: markerName
@@ -105,7 +108,7 @@ console.log(typeof(mapLocs));
         });
 
         // Add the marker to the map
-        mapMarkers[i].setMap(map);
+        markers[i].setMap(map);
 
     }
     var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });

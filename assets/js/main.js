@@ -4,7 +4,7 @@ initScreen();
 
 
 function initScreen(){
-     document.getElementById("crimeTable").innerHTML = "<h5 class='msgHeader'>To view a listing of Crime details you can select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
+     document.getElementById("crimeTable").innerHTML = "<h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
     $(document).ready(function(){
   $(".chartHeader").hide();
   });
@@ -293,7 +293,7 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
                     cell.appendChild(cellText);
                     row.appendChild(cell);
                     var cell = document.createElement("td");
-                    var cellText = document.createTextNode("still under investigation");
+                    var cellText = document.createTextNode(streetCrimeData[i].outcome_status);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
                     var cell = document.createElement("td");
