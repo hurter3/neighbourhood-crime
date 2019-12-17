@@ -41,66 +41,69 @@
         <!--Nav end-->
         <main>
 
-            <div>
-                <select id="select-area">
-                                            <option value="default">Select Area</option>
-                        </select>
-                <select id="select-month">
-                                <option value="default" >Select Month</option>
-                        </select>
-                <h2>Last month there were 91 incident in Sunbury</h2>
-            </div>
+
 
             <article>
 
                 <div class="row no-gutters set-position border-settings">
-                    <div class="col-12 col-md-4 col-lg-3 col-xl-2 p-0 chart-box-style text-center">
-                        <div class="row no-gutters">
-                            <div class="col-12 p-0">
-                                <div id="piechart">
-                                    <h5> Select Incident Categories to Explore</h5>
-                                    <div id="selected-filter">selected: <span class="filter"></span>
-                                    </div>
-
-                                </div>
-
+                    <div class="col-12 col-md-4 chart-box-style text-center">
+                        <div id="piechart">
+                            <h5> Select Incident Categories to Explore</h5>
+                            <div id="selected-filter">selected: <span class="filter"></span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12 col-md-8 col-lg-9 col-xl-10 map-style">
+                    <div class="col-12 col-md-8 map-style">
                         <div id="map"></div>
                     </div>
                 </div>
 
+
             </article>
+
             <div>
-                <button class="btn1 button clear" onclick="clearDocument()">Clear</button>
-
-                <button class="btn2 button" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button>
-                <button class="btn3 button" onclick="writeToDocument('https://data.police.uk/api/forces')">Forces</button>
-                <button class="btn4 button" onclick="writeToDocument(' https://data.police.uk/api/surrey/neighbourhoods')">Neighbourhoods</button>
-                <button class="btn9 button" onclick="writeToDocument3('https://data.police.uk/api/forces/surrey')">Special Forces</button>
-
+                <!--                <select id="select-area"> -->
+                <!--                                        <option value="default">Select Area</option>  -->
+                <!--                    </select>  -->
+                <!--            <select id="select-month">  -->
+                <!--                            <option value="default" >Select Month</option>  -->
+                <!--                    </select>  -->
 
 
             </div>
-            <div id="data"></div>
 
-            <div id="crimeTable"></div>
 
-            <div class="row">
-                <div class="col-12 col-md-4 col-lg-3 bg-light chart-gender">
+            <div class="container-fluid">
+                <!--        <button class="btn1 button clear" onclick="clearDocument()">Clear</button>  -->
 
-                    <h3 class="chartHeader">Stop and Search per Gender</h3>
+                <!--            <button class="btn2 button" onclick="writeToDocument('https://data.police.uk/api/crime-categories?')">Categories</button> -->
+                <!--            <button class="btn3 button" onclick="writeToDocument('https://data.police.uk/api/forces')">Forces</button> -->
+                <!--            <button class="btn4 button" onclick="writeToDocument(' https://data.police.uk/api/surrey/neighbourhoods')">Neighbourhoods</button> -->
+                <!--            <button class="btn9 button" onclick="writeToDocument3('https://data.police.uk/api/forces/surrey')">Special Forces</button> -->
+
+                <br>
+                <br>
+                <h5 class="msgHeader">Last month there were 91 incidents in Sunbury</h5>
+            </div>
+
+
+            <div id="crimeTable" class="crimeTable"></div>
+
+
+
+            <div class="row bg-light">
+             
+                <div class="col-12 col-md-4 col-lg-3 chart">
+
+                    <h3 class="chartHeader1"></h3>
                     <div id="per-gender"></div>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3 bg-light chart-ethnicity">
-                    <h3 class="chartHeader">Stop and Search per Ethnicity</h3>
+                <div class="col-12 col-md-4 col-lg-3 chart">
+                    <h3 class="chartHeader2"></h3>
                     <div id="per-ethnicity"></div>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3 bg-light chart-age">
-                    <h3 class="chartHeader">Stop and Search Success Ratio</h3>
+                <div class="col-12 col-md-4 col-lg-3 chart">
+                    <h3 class="chartHeader3"></h3>
                     <div id="per-success"></div>
 
                 </div>
@@ -117,7 +120,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
         <script src="assets/js/main.js"></script>
-        
+
 </body>
 
 </html>

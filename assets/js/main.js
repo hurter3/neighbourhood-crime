@@ -1,17 +1,16 @@
-checkUserInput();
 
-function getData(url, cb) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            cb(JSON.parse(this.responseText));
-        }
-    };
-    xhr.open("GET", url);
-    xhr.send();
+
+initScreen();
+
+
+function initScreen(){
+     document.getElementById("crimeTable").innerHTML = "<h5 class='msgHeader'>To view a listing of Crime details you can select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
+    $(document).ready(function(){
+  $(".chartHeader").hide();
+  });
 }
 
-
+checkUserInput();
 
 queue()
     .defer(d3.json, "assets/data/streetcrime.json")
@@ -104,27 +103,6 @@ function hideClearShowOtherButtons() {
 
 
 
-var select = document.getElementById("select-area"),
-    arr = ["Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton", "Sunbury", "Feltham", "Shepperton", "Kingston", "Richmond", "Walton"];
-for (var i = 0; i < arr.length; i++) {
-    var option = document.createElement("OPTION"),
-        txt = document.createTextNode(arr[i]);
-    option.appendChild(txt);
-    option.setAttribute("value", arr[i]);
-    select.insertBefore(option, select.lastChild);
-
-}
-
-var select = document.getElementById("select-month"),
-    arr = ["2019-09", "2019-08", "2019-07", "2019-06"];
-for (var i = 0; i < arr.length; i++) {
-    var option = document.createElement("OPTION"),
-        txt = document.createTextNode(arr[i]);
-    option.appendChild(txt);
-    option.setAttribute("value", arr[i]);
-    select.insertBefore(option, select.lastChild);
-
-}
 
 
 
@@ -179,17 +157,10 @@ function checkUserInput() {
 
 function stopAndSearch() {
 
- $(document).ready(function() {
-            $("article").empty();
-        });
 
-showClearHideOtherButtons();
-
-
-$(document).ready(function(){
-  $(".btn1").hide();
-  });
-
+clearPageSetHeaders();
+  
+ 
     queue()
         .defer(d3.json, "assets/data/stopandsearch.json")
         .await(makeBarGraphs);
@@ -246,6 +217,25 @@ $(document).ready(function(){
   });
 }
 
+function clearPageSetHeaders() {
+
+$(document).ready(function() {
+            $("article").empty();
+        });
+        
+$(document).ready(function() {
+            $("crimeTable").empty();
+        });
+        
+  $(document).ready(function(){
+  $(".msgHeader").hide();
+  });
+  
+  document.getElementById("crimeTable").innerHTML = ""; 
+}
+
+
+
 //defualt category on initial build
 var pieSliceNone = "none";
 
@@ -263,26 +253,16 @@ var locationsArray = [{ lat: 51.418049, lng: -0.431713 }];
 
 function piechartSliceSelected() {
 
-
-
     var selectedGroup = document.getElementById("selected-filter").innerText;
     var selectedFilter = $(".filter");
     var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
     var splitCategoryArray = pieSliceCategories.split(', ');
 
-
-
-
     $.getJSON("assets/data/streetcrime.json", function(json) {
         var streetCrimeData = json;
         
-
-    
-
-
-        CreateTableFromJSON(splitCategoryArray, streetCrimeData);
+    CreateTableFromJSON(splitCategoryArray, streetCrimeData);
     });
-
 }
 
 function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
@@ -325,40 +305,16 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
         cell.appendChild(cellText);
         row.appendChild(cell);
 
-
         tblBody.appendChild(row);
        
-
-
-        var locationsArray = "[";
-        var locationsCount = 0;
-      
-
-
         for (var c = 0; c < splitCategoryArray.length; c++) {
-            var insertcounter = 0;
-            
             for (var i = 0; i < streetCrimeData.length; i++) {
                 // creating all cells    
                
-               
                 if (splitCategoryArray[c] === streetCrimeData[i].category) {
-                   
-                    insertcounter = insertcounter + 1;
-
-                    if (locationsCount === 0) {
-                        locationsArray = locationsArray.concat("{ lat:" + streetCrimeData[i].location.latitude + ",lng:" + streetCrimeData[i].location.longitude + "}");
-                    }
-
-                    else {
-                        locationsArray = locationsArray.concat(",{ lat:" + streetCrimeData[i].location.latitude + ",lng:" + streetCrimeData[i].location.longitude + "}");
-                    };
-                    locationsCount = locationsCount + 1;
-                   
-
+       
                     // creates a table row
                     var row = document.createElement("tr");
-
 
                     // Create a <td> element and a text node, make the text
                     // node the contents of the <td>, and put the <td> at
@@ -393,7 +349,6 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
                     cell.appendChild(cellText);
                     row.appendChild(cell);
 
-
                     // add the row to the end of the table body
                     tblBody.appendChild(row);
                   
@@ -401,10 +356,8 @@ function CreateTableFromJSON(splitCategoryArray, streetCrimeData) {
 
                 }
             }
-        showClearHideOtherButtons();
         }
 
-        locationsArray = locationsArray.concat("]");
      
 
         // put the <tbody> in the <table>
