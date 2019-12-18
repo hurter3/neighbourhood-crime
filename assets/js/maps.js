@@ -1,3 +1,10 @@
+
+//////////////////////////////////////////////////////////////////////////
+// initMap is used the first time the screen is displayed or refreshed
+// by the script in the index.html file. 
+// <script defer src="https://maps.googleapis.com/maps/api/js.....&callback=initMap"></script>
+/////////////////////////////////////////////////////////////////////////
+
 var mapMarkers = [];
 var infoWindow;
 
@@ -29,9 +36,13 @@ function initMap() {
     var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 }
 
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+// On all other occasions the buildMarkersArray will be invoke when a pieSlice is clicked 
+// via function piechartSliceSelected.
+// It builds 2 array, which are passed through to showOnMap.
+// locationArray contains the relevant LatLng values for the marker (clustermarkers)
+// and mapNames is used to displayed in the infoWindow when you hover over a label.
+////////////////////////////////////////////////////////////////////////////////////////////
 
 function buildMarkersArray(splitCategoryArray, streetCrimeData) {
 
