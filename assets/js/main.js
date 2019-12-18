@@ -41,6 +41,9 @@ function makeGraphs(error, transactionsData) {
 checkUserInput();
 
 
+// The checkUserInput function is the driver to either trigger activity releating to either the
+// piechart or the barchart sections. 
+
 function checkUserInput() {
     
  // If the Piechart is clicked on 
@@ -66,27 +69,50 @@ function checkUserInput() {
 }
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The piechartSliceSelected function it critical to the website.
+// It uses jQuery to get the innerHTML for class "filter"
+// (for eg: "selected: violent-crime, anti-social-behaviour").
+// Then uses split to remove the the "selected: " text and then split again
+// to create an array of selected categories.
+// 
+// The json file is read for the selected categories and reflected on the details  
+// table and markers (cluster markers) on google maps.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 function piechartSliceSelected() {
 
-    var selectedGroup = document.getElementById("selected-filter").innerText;
+//    var selectedGroup = document.getElementById("selected-filter").innerText;
     var selectedFilter = $(".filter");
     var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
     var splitCategoryArray = pieSliceCategories.split(', ');
 
+
     $.getJSON("assets/data/streetcrime.json", function(json) {
         var streetCrimeData = json;
         
-    createTableDetails(splitCategoryArray, streetCrimeData);
+     createTableDetails(splitCategoryArray, streetCrimeData);
      buildMarkersArray(splitCategoryArray, streetCrimeData);
     });
     
    
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// The createTableDetails function creates the table, tbody elements and then uses the
+// appendChild for the header literals.
+//
+// Then it generates the table rows by looping through the splitCategoryArray array of all the 
+// selected categories and extract the relevant streetCrimeData rows fields to append the
+// tr and td elements. And finally uses setAttribute to set the border. 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function createTableDetails(splitCategoryArray, streetCrimeData) {
 
-    if (splitCategoryArray[0] !== "none") {
+    
 
         // creates a <table> element and a <tbody> element
         var tbl = document.createElement("table");
@@ -171,14 +197,9 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
                     // add the row to the end of the table body
                     tblBody.appendChild(row);
                   
-
-
                 }
             }
-        }
-
-     
-
+        
         // put the <tbody> in the <table>
         tbl.appendChild(tblBody);
         // appends <table> into <body>
@@ -190,6 +211,14 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
 }
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// The stopAndSearch function uses D3/DC.js to generate 3 interactive barchart from 
+// the stopandsearch.json file which was generated using CURL
+// The same index.html page is used, hence the clearPageSetHeaders initialses the page 
+// before the graphs are rendered.
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 function stopAndSearch() {
 
@@ -251,6 +280,13 @@ clearPageSetHeaders();
   });
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// The clearPageSetHeaders function initialises the index.html using jQuery to empty
+// article element, crimeTable id and headings.
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 function clearPageSetHeaders() {
 
 $(document).ready(function() {
@@ -269,49 +305,53 @@ $(document).ready(function() {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////// 
+/////////////////////    The below 4 functions have been left in just incase i incorporate
+////////////////////     the buttons to prove API functionality but will be removed before   
+///////////////////      submitting my project if not used.
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 
+//function writeToDocument(url) {
+//    getData(url, function(data) {
+//        for (var i = 0; i < data.length; i++) {
+//            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
+//             }
+//         });
+//        showClearHideOtherButtons();
+//};
 
-function writeToDocument(url) {
-    getData(url, function(data) {
-        for (var i = 0; i < data.length; i++) {
-            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
-             }
-         });
-        showClearHideOtherButtons();
-};
+//function writeToDocument3(url) {
+//    getData(url, function(data) {
+//        for (var i = 0; i < data.length; i++) {
+//           document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
+//             }
+//         });
+//        showClearHideOtherButtons();
+//};
 
-function writeToDocument3(url) {
-    getData(url, function(data) {
-        for (var i = 0; i < data.length; i++) {
-           document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
-             }
-         });
-        showClearHideOtherButtons();
-};
-
-function clearDocument() {
-    $(document).ready(function() {
-            $("#data").empty();
-        });
-         $(document).ready(function() {
-            $("#crimeTable").empty();
-        });
-        hideClearShowOtherButtons()
-}
+//function clearDocument() {
+//    $(document).ready(function() {
+//            $("#data").empty();
+//        });
+//         $(document).ready(function() {
+//            $("#crimeTable").empty();
+//        });
+//        hideClearShowOtherButtons()
+//}
 
 
-function getData(url, cb) {
-    var xhr = new XMLHttpRequest();
+//function getData(url, cb) {
+//    var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            cb(JSON.parse(this.responseText));
-        }
-    };
-    xhr.open("GET", url);
-    xhr.send();
-}
+//    xhr.onreadystatechange = function() {
+//        if (this.readyState == 4 && this.status == 200) {
+//            cb(JSON.parse(this.responseText));
+//        }
+//    };
+//    xhr.open("GET", url);
+//    xhr.send();
+//}
 
 
 
