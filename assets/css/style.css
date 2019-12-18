@@ -69,29 +69,29 @@ h3,h4,h5{
 
 
 
-svg {
+#svg {
     height: 350px;
     width: 400px;
     /*   border: solid 1px #87b2f8; */
 }
 
 
-.barcharts.svg {
+barcharts.svg {
     height: 300px;
     width: 100%;
     position: relative;
     border: solid 1px #87b2f8; 
 }
 
-.dc-chart{
+dc-chart{
     height:300;
 
 }
 .chart {
-    width:400;
-    height:300;
     margin-top: 60px;
     position:relative;
+    padding:30px;
+    display: inline-block;
 }
 
 

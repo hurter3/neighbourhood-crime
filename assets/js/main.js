@@ -234,8 +234,8 @@ clearPageSetHeaders();
         var gender_dim = ndx.dimension(dc.pluck('gender'));
         var total_per_gender = gender_dim.group().reduceCount();
         dc.barChart('#per-gender')
-            .width(350)
-            .height(200)
+            .width(400)
+            .height(300)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_per_gender)
@@ -248,8 +248,8 @@ clearPageSetHeaders();
         var ethnic_dim = ndx.dimension(dc.pluck('officer_defined_ethnicity'));
         var total_per_ethnicity = ethnic_dim.group().reduceCount();
         dc.barChart('#per-ethnicity')
-            .width(350)
-            .height(200)
+            .width(400)
+            .height(300)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_per_ethnicity)
@@ -262,8 +262,8 @@ clearPageSetHeaders();
         var outcome_dim = ndx.dimension(dc.pluck('outcome_linked_to_object_of_search'));
         var total_per_outcome = outcome_dim.group().reduceCount();
         dc.barChart('#per-success')
-            .width(350)
-            .height(200)
+            .width(400)
+            .height(300)
             .margins({ top: 10, right: 50, bottom: 30, left: 50 })
             .dimension(gender_dim)
             .group(total_per_outcome)
@@ -302,7 +302,14 @@ $(document).ready(function() {
   });
   
   document.getElementById("crimeTable").innerHTML = ""; 
+  document.getElementById("chartHeader0").innerHTML = "<h3 class='bg-light'>STOP & SEARCH statistics for the current month</h3>"; 
+  document.getElementById("chartHeader1").innerHTML = "<h5>By Gender</h5>"; 
+  document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>"; 
+  document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>"; 
 }
+  
+   
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////// 
