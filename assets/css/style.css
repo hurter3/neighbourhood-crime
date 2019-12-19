@@ -1,18 +1,30 @@
+/*----------NAVBAR---------*/
+
+.navbar .navbar-toggler {
+    border: 0;
+}
+
+.navbar .navbar-brand {
+    font-weight: bold;
+}
+
+.navbar .navbar-nav a {
+    font-weight: bold;
+}
 
 
-/* Headings  */
+/*--------- HEADINGS------*/
 
 h3,h4,h5{
     text-align: center
 }
-
-.chartHeader {
-    text-align: center;
- margin-top: 30px;  
-    
+/* Border style  */
+.border-setting {
+    display: inline-block;
+    border: solid 1px #cfe0fc;
 }
 
-/* PieChart style */
+/*---------PIE CHART------*/
 
 
 .chart-box-style {
@@ -23,34 +35,14 @@ h3,h4,h5{
    
 }
 
-/* Border style  */
-.border-setting {
-    display: inline-block;
-    border: solid 1px #cfe0fc;
-}
 
-
-/* Map area style */
-
-
-/*.map-style{ */
-/*    position: relative;*/
-/*    width: 300px;*/
-/*    height: 500px;*/
-/*}*/
-
-/*#map-style {*/
-/*    border-left: solid 1px #cfe0fc;*/
-/*}*/
+/*--------- MAP------*/
 
 
 #map {
-   
-   
     height: 450px;
     width:100%;
 }
-
 
 .set-position {
     top:44px;
@@ -58,77 +50,23 @@ h3,h4,h5{
     position: relative;
        }
 
-
-
-/* Table area style */
+/*------- DATA TABLE-----*/
 
 .crimeTable, th, td {
-  
     padding:10px;
 }
 
+/*------- BAR CHART------*/
 
-
-#svg {
-    height: 350px;
-    width: 400px;
-    /*   border: solid 1px #87b2f8; */
-}
-
-
-barcharts.svg {
-    height: 300px;
-    width: 100%;
-    position: relative;
-    border: solid 1px #87b2f8; 
-}
-
-dc-chart{
-    height:300;
-
-}
 .chart {
-    margin-top: 60px;
+    margin-top: 70px;
     position:relative;
     padding:30px;
     display: inline-block;
 }
 
-
-
-/* Button style  */
-
-
-.button {
-  background-color:#e6e6ff ;
-  border: none;
-  color: black;
-  padding: 40px 100px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  
+.chartHeader {
+    text-align: center;
+ margin-top: 30px;  
+    
 }
-
-.button9 {
-  background-color:#e6e6ff ;
-  border: none;
-  color: black;
-  padding: 40px 50px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  
-}
-.clear { padding: 10px 16px;
-}
-
-
-.button:hover {
-  background-color: lightblue; /* Green */
-  color: white;
- 
-}
-

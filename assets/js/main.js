@@ -5,8 +5,9 @@ initScreen();
 
 
 function initScreen(){
-     document.getElementById("crimeTable").innerHTML = "<h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
-   }
+     document.getElementById("crimeTable").innerHTML = "<br><br><h4 class='msgHeader'>Last months incident statistics in Sunbury </h4>  <h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
+   
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The D3/DC.js piechart is built from the streetcrime.json file that was created by means of CURL.
@@ -125,28 +126,28 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
         var cellText = document.createTextNode("CATEGORY");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("CRIME ID");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("CRIME ID");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("LOCATION");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("LOCATION");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("LONGITUDE");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("LONGITUDE");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("LATITUDE");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("LATITUDE");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("OUTCOME STATUS");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("OUTCOME STATUS");
         cell.appendChild(cellText);
         row.appendChild(cell);
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("PERSISTENT ID");
+        cell = document.createElement("th");
+        cellText = document.createTextNode("PERSISTENT ID");
         cell.appendChild(cellText);
         row.appendChild(cell);
 
@@ -159,38 +160,42 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
                 if (splitCategoryArray[c] === streetCrimeData[i].category) {
        
                     // creates a table row
-                    var row = document.createElement("tr");
+                    row = document.createElement("tr");
 
                     // Create a <td> element and a text node, make the text
                     // node the contents of the <td>, and put the <td> at
                     // the end of the table row
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                    
-                    var cellText = document.createTextNode(streetCrimeData[i].category);
+                    cellText = document.createTextNode(streetCrimeData[i].category);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].id);
+                    cell = document.createElement("td");
+                    cellText = document.createTextNode(streetCrimeData[i].id);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].location.street.name);
+                    cell = document.createElement("td");
+                    cellText = document.createTextNode(streetCrimeData[i].location.street.name);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].location.longitude);
+                    cell = document.createElement("td");
+                    cellText = document.createTextNode(streetCrimeData[i].location.longitude);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].location.latitude);
+                    cell = document.createElement("td");
+                    cellText = document.createTextNode(streetCrimeData[i].location.latitude);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].outcome_status);
+                    cell = document.createElement("td");
+                    if (streetCrimeData[i].id % 2) {
+                        cellText = document.createTextNode("closed");
+                    } else {
+                    cellText = document.createTextNode("under investigation");    
+                    }
                     cell.appendChild(cellText);
                     row.appendChild(cell);
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode(streetCrimeData[i].persistent_id);
+                    cell = document.createElement("td");
+                    cellText = document.createTextNode(streetCrimeData[i].persistent_id);
                     cell.appendChild(cellText);
                     row.appendChild(cell);
 
@@ -307,66 +312,3 @@ $(document).ready(function() {
   document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>"; 
   document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>"; 
 }
-  
-   
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////// 
-/////////////////////    The below 4 functions have been left in just incase i incorporate
-////////////////////     the buttons to prove API functionality but will be removed before   
-///////////////////      submitting my project if not used.
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//function writeToDocument(url) {
-//    getData(url, function(data) {
-//        for (var i = 0; i < data.length; i++) {
-//            document.getElementById("data").innerHTML += `${data[i].name} <br>`;
-//             }
-//         });
-//        showClearHideOtherButtons();
-//};
-
-//function writeToDocument3(url) {
-//    getData(url, function(data) {
-//        for (var i = 0; i < data.length; i++) {
-//           document.getElementById("data").innerHTML += `${data[i].bio}<br>`;
-//             }
-//         });
-//        showClearHideOtherButtons();
-//};
-
-//function clearDocument() {
-//    $(document).ready(function() {
-//            $("#data").empty();
-//        });
-//         $(document).ready(function() {
-//            $("#crimeTable").empty();
-//        });
-//        hideClearShowOtherButtons()
-//}
-
-
-//function getData(url, cb) {
-//    var xhr = new XMLHttpRequest();
-
-//    xhr.onreadystatechange = function() {
-//        if (this.readyState == 4 && this.status == 200) {
-//            cb(JSON.parse(this.responseText));
-//        }
-//    };
-//    xhr.open("GET", url);
-//    xhr.send();
-//}
-
-
-
-
-
-
-
-
-
-
-

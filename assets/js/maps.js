@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////
 // initMap is used the first time the screen is displayed or refreshed
 // by the script in the index.html file. 
-// <script defer src="https://maps.googleapis.com/maps/api/js.....&callback=initMap"></script>
+// <script defer src="https://maps.googleapis..&callback=initMap"></script>
 /////////////////////////////////////////////////////////////////////////
 
 var mapMarkers = [];
@@ -58,10 +58,7 @@ function buildMarkersArray(splitCategoryArray, streetCrimeData) {
 
             }
         }
-        console.log(locationArray);
-        console.log(typeof(locationArray));
-        console.log(mapNames);
-        console.log(typeof(mapNames));
+        
     }
 
 
@@ -80,16 +77,13 @@ function buildMarkersArray(splitCategoryArray, streetCrimeData) {
         zoom: 13
     };
 
-    // The following function is in maps.js. It shows the selected locations on the Map.
-
+ 
     showOnMap(mapDetails, locationArray, mapLabels, mapNames);
 }
 
 
 function showOnMap(mapDetails, mapLocs, mapLabels, mapNames) {
-    console.log("within showOnMap");
-    console.log(mapLocs);
-    console.log(typeof(mapLocs));
+    
     // This function returns all the markers into "markers" which is passed to MarkerClusterer to be clustered
 
     var map = new google.maps.Map(document.getElementById("map"), mapDetails);
