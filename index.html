@@ -15,6 +15,7 @@
 
 <body>
 
+
         <!--Nav-->
 
         <nav class="navbar navbar-light navbar-expand-sm bg-light fixed-top">
@@ -45,14 +46,14 @@
             <article>
 
                 <div class="row no-gutters set-position border-settings">
-                    <div class="col-12 col-md-4 chart-box-style text-center">
+                    <div class="col-12 col-md-6 chart-box-style text-center">
                         <div id="piechart">
                             <h5> Select Incident Categories to Explore</h5>
                             <div id="selected-filter">selected: <span class="filter"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-8 map-style">
+                    <div class="col-12 col-md-6 map-style">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -65,16 +66,16 @@
 
             <div id="chartHeader0"></div>
             <div class="row no-gutters">
-                <div class="col-12 col-lg-4 chart">
+                <div class="col-12 col-md-6 col-lg-4 chart">
 
                     <div id="chartHeader1"></div>
                     <div id="per-gender"></div>
                 </div>
-                <div class="col-12 col-lg-4 chart">
+                <div class="col-12 col-md-6 col-lg-4 chart">
                     <div id="chartHeader2"></div>
                     <div id="per-success"></div>
                 </div>
-                <div class="col-12 col-lg-4 chart">
+                <div class="col-12 col-md-6 col-lg-4 chart">
                     <div id="chartHeader3"></div>
                     <div id="per-ethnicity"></div>
 
@@ -89,11 +90,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT13Qu2yjS5acflZt3nCyTvd0VWQ0l-E&libraries=places&callback=initMap"></script>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js "></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
+       <script src="https://code.jquery.com/jquery-3.4.1.min.js " integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin=" anonymous "></script>
         
+       
         <script src="assets/js/main.js"></script>
         <script src="assets/js/maps.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+     
         
         <!-- ********************************************************************************* -->
         <!--    The scripts are at the end of the main element so they get loaded last.        -->
