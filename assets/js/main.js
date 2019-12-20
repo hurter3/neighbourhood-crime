@@ -1,12 +1,11 @@
-
-
-
 initScreen();
 
 
-function initScreen(){
-     document.getElementById("crimeTable").innerHTML = "<br><br><h4 class='msgHeader'>Last months incident statistics in Sunbury </h4>  <h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>"; 
-   
+function initScreen() {
+    document.getElementById("crimeTable").innerHTML = "<br><br><h4 class='msgHeader'>Last months incident statistics in Sunbury </h4>  <h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>";
+    $(document).ready(function() {
+        $(".barcharts").hide();
+    });
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,8 +45,8 @@ checkUserInput();
 // piechart or the barchart sections. 
 
 function checkUserInput() {
-    
- // If the Piechart is clicked on 
+
+    // If the Piechart is clicked on 
 
     $("#piechart").click(function() {
 
@@ -58,8 +57,8 @@ function checkUserInput() {
         piechartSliceSelected();
 
     });
-    
-// If Stop and Search is clicked 
+
+    // If Stop and Search is clicked 
 
     $("#stopandsearch-link").click(function() {
 
@@ -85,7 +84,7 @@ function checkUserInput() {
 
 function piechartSliceSelected() {
 
-//    var selectedGroup = document.getElementById("selected-filter").innerText;
+    //    var selectedGroup = document.getElementById("selected-filter").innerText;
     var selectedFilter = $(".filter");
     var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
     var splitCategoryArray = pieSliceCategories.split(', ');
@@ -93,12 +92,16 @@ function piechartSliceSelected() {
 
     $.getJSON("assets/data/streetcrime.json", function(json) {
         var streetCrimeData = json;
-        
-     createTableDetails(splitCategoryArray, streetCrimeData);
-     buildMarkersArray(splitCategoryArray, streetCrimeData);
+
+        createTableDetails(splitCategoryArray, streetCrimeData);
+        buildMarkersArray(splitCategoryArray, streetCrimeData);
+
+        $(document).ready(function() {
+            $(".msgHeader").hide();
+        });
     });
-    
-   
+
+
 }
 
 
@@ -113,98 +116,99 @@ function piechartSliceSelected() {
 
 function createTableDetails(splitCategoryArray, streetCrimeData) {
 
-    
 
-        // creates a <table> element and a <tbody> element
-        var tbl = document.createElement("table");
-        var tblBody = document.createElement("tbody");
 
-        // Create a <tr> and <th> element with headings.
+    // creates a <table> element and a <tbody> element
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
 
-        var row = document.createElement("tr");
-        var cell = document.createElement("th");
-        var cellText = document.createTextNode("CATEGORY");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("CRIME ID");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("LOCATION");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("LONGITUDE");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("LATITUDE");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("OUTCOME STATUS");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-        cell = document.createElement("th");
-        cellText = document.createTextNode("PERSISTENT ID");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
+    // Create a <tr> and <th> element with headings.
 
-        tblBody.appendChild(row);
-       
-        for (var c = 0; c < splitCategoryArray.length; c++) {
-            for (var i = 0; i < streetCrimeData.length; i++) {
-                // creating all cells    
-               
-                if (splitCategoryArray[c] === streetCrimeData[i].category) {
-       
-                    // creates a table row
-                    row = document.createElement("tr");
+    var row = document.createElement("tr");
+    var cell = document.createElement("th");
+    var cellText = document.createTextNode("CATEGORY");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("CRIME ID");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LOCATION");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LONGITUDE");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LATITUDE");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("OUTCOME STATUS");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("PERSISTENT ID");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
 
-                    // Create a <td> element and a text node, make the text
-                    // node the contents of the <td>, and put the <td> at
-                    // the end of the table row
-                    cell = document.createElement("td");
-                   
-                    cellText = document.createTextNode(streetCrimeData[i].category);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    cellText = document.createTextNode(streetCrimeData[i].id);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    cellText = document.createTextNode(streetCrimeData[i].location.street.name);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    cellText = document.createTextNode(streetCrimeData[i].location.longitude);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    cellText = document.createTextNode(streetCrimeData[i].location.latitude);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    if (streetCrimeData[i].id % 2) {
-                        cellText = document.createTextNode("closed");
-                    } else {
-                    cellText = document.createTextNode("under investigation");    
-                    }
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                    cell = document.createElement("td");
-                    cellText = document.createTextNode(streetCrimeData[i].persistent_id);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
+    tblBody.appendChild(row);
 
-                    // add the row to the end of the table body
-                    tblBody.appendChild(row);
-                  
+    for (var c = 0; c < splitCategoryArray.length; c++) {
+        for (var i = 0; i < streetCrimeData.length; i++) {
+            // creating all cells    
+
+            if (splitCategoryArray[c] === streetCrimeData[i].category) {
+
+                // creates a table row
+                row = document.createElement("tr");
+
+                // Create a <td> element and a text node, make the text
+                // node the contents of the <td>, and put the <td> at
+                // the end of the table row
+                cell = document.createElement("td");
+
+                cellText = document.createTextNode(streetCrimeData[i].category);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].id);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.street.name);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.longitude);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.latitude);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                if (streetCrimeData[i].id % 2) {
+                    cellText = document.createTextNode("closed");
                 }
+                else {
+                    cellText = document.createTextNode("under investigation");
+                }
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].persistent_id);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+
+                // add the row to the end of the table body
+                tblBody.appendChild(row);
+
             }
-        
+        }
+
         // put the <tbody> in the <table>
         tbl.appendChild(tblBody);
         // appends <table> into <body>
@@ -212,6 +216,7 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
         //  element.appendChild(tbl);
         // sets the border attribute of tbl to 2;
         tbl.setAttribute("border", "2");
+
     }
 }
 
@@ -227,8 +232,8 @@ function createTableDetails(splitCategoryArray, streetCrimeData) {
 
 function stopAndSearch() {
 
-clearPageSetHeaders();
-  
+    clearPageSetHeaders();
+
     queue()
         .defer(d3.json, "assets/data/stopandsearch.json")
         .await(makeBarGraphs);
@@ -280,9 +285,7 @@ clearPageSetHeaders();
 
         dc.renderAll();
     }
-     $(document).ready(function(){
-  $(".chartHeader").show();
-  });
+   
 }
 
 
@@ -294,21 +297,25 @@ clearPageSetHeaders();
 
 function clearPageSetHeaders() {
 
-$(document).ready(function() {
-            $("article").empty();
-        });
-        
-$(document).ready(function() {
-            $("crimeTable").empty();
-        });
-        
-  $(document).ready(function(){
-  $(".msgHeader").hide();
-  });
-  
-  document.getElementById("crimeTable").innerHTML = ""; 
-  document.getElementById("chartHeader0").innerHTML = "<h3 class='bg-light'>STOP & SEARCH statistics for the current month</h3>"; 
-  document.getElementById("chartHeader1").innerHTML = "<h5>By Gender</h5>"; 
-  document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>"; 
-  document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>"; 
+    $(document).ready(function() {
+        $("article").empty();
+    });
+
+    $(document).ready(function() {
+        $("crimeTable").empty();
+    });
+
+    $(document).ready(function() {
+        $(".msgHeader").hide();
+    });
+    
+    $(document).ready(function() {
+        $(".barcharts").show();
+    });
+
+    document.getElementById("crimeTable").innerHTML = "";
+    document.getElementById("chartHeader0").innerHTML = "<h3 class='bg-light'>STOP & SEARCH statistics for the current month</h3>";
+    document.getElementById("chartHeader1").innerHTML = "<h5>By Gender</h5>";
+    document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>";
+    document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>";
 }
