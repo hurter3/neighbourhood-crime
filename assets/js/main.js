@@ -84,8 +84,13 @@ function checkUserInput() {
 
 function piechartSliceSelected() {
 
-    //    var selectedGroup = document.getElementById("selected-filter").innerText;
+    var selectedGroup = document.getElementById("selected-filter").innerText;
+    console.log(selectedGroup);
     var selectedFilter = $(".filter");
+ console.log(selectedFilter);   
+    if (selectedGroup !== "selected:") {
+    
+    
     var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
     var splitCategoryArray = pieSliceCategories.split(', ');
 
@@ -101,7 +106,11 @@ function piechartSliceSelected() {
         });
     });
 
-
+} else {
+    $(document).ready(function() {
+            $(".msgHeader").show();
+        });
+}
 }
 
 
