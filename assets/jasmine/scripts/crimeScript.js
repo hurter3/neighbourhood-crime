@@ -1,0 +1,434 @@
+initScreen();
+
+
+function initScreen() {
+    document.getElementById("crimeTable").innerHTML = "<br><br><h4 class='msgHeader'>Last months incident statistics in Sunbury </h4>  <h5 class='msgHeader'>To view a listing of Crime details, select one or more categories from the pie chart and their relevant markers will be highlighted on the map. </h5>";
+    $(document).ready(function() {
+        $(".barcharts").hide();
+    });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The D3/DC.js piechart is built from the streetcrime.json file that was created by means of CURL.
+// Queue is used to ensure the file is loaded before the graph is rendered.
+// I set the slicesCap to 6 to ensure there were not to many categories being displayed to clutter the pieChart
+// and added a legend.
+//
+// The pichart is the driver of the crime detail table and correlating google markers.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+queue()
+    .defer(d3.json, "assets/data/streetcrime.json")
+    .await(makeGraphs);
+
+function makeGraphs(error, transactionsData) {
+    var chart = dc.pieChart("#piechart");
+    var ndx = crossfilter(transactionsData);
+    var name_dim = ndx.dimension(dc.pluck('category'));
+    var total_per_category = name_dim.group().reduceCount();
+    chart.height(350)
+        .radius(100)
+        .transitionDuration(1500)
+        .dimension(name_dim)
+        .group(total_per_category)
+        .slicesCap(6)
+        .legend(dc.legend());
+
+    dc.renderAll();
+}
+
+
+checkUserInput();
+
+
+// The checkUserInput function is the driver to either trigger activity releating to either the
+// piechart or the barchart sections. 
+
+function checkUserInput() {
+
+    // If the Piechart is clicked on 
+
+    $("#piechart").click(function() {
+
+        $(document).ready(function() {
+            $("table").empty();
+        });
+
+        piechartSliceSelected();
+
+    });
+
+    // If Stop and Search is clicked 
+
+    $("#stopandsearch-link").click(function() {
+
+        // Show Stop and Search bar charts
+
+        stopAndSearch();
+    });
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The piechartSliceSelected function it critical to the website.
+// It uses jQuery to get the innerHTML for class "filter"
+// (for eg: "selected: violent-crime, anti-social-behaviour").
+// Then uses split to remove the the "selected: " text and then split again
+// to create an array of selected categories.
+// 
+// The json file is read for the selected categories and reflected on the details  
+// table and markers (cluster markers) on google maps.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function piechartSliceSelected() {
+
+    var selectedGroup = document.getElementById("selected-filter").innerText;
+    var selectedFilter = $(".filter");
+ 
+    if (selectedGroup !== "selected:") {
+
+    var pieSliceCategories = selectedFilter[0].innerText.split(": ")[0];
+    var splitCategoryArray = pieSliceCategories.split(', ');
+
+    $.getJSON("assets/data/streetcrime.json", function(json) {
+        var streetCrimeData = json;
+
+        createTableDetails(splitCategoryArray, streetCrimeData);
+        buildMarkersArray(splitCategoryArray, streetCrimeData);
+
+        $(document).ready(function() {
+            $(".msgHeader").hide();
+        });
+    });
+
+} else {
+    $(document).ready(function() {
+            $(".msgHeader").show();
+        });
+}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// The createTableDetails function creates the table, tbody elements and then uses the
+// appendChild for the header literals.
+//
+// Then it generates the table rows by looping through the splitCategoryArray array of all the 
+// selected categories and extract the relevant streetCrimeData rows fields to append the
+// tr and td elements. And finally uses setAttribute to set the border. 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function createTableDetails(splitCategoryArray, streetCrimeData) {
+
+
+
+    // creates a <table> element and a <tbody> element
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+
+    // Create a <tr> and <th> element with headings.
+
+    var row = document.createElement("tr");
+    var cell = document.createElement("th");
+    var cellText = document.createTextNode("CATEGORY");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("CRIME ID");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LOCATION");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LONGITUDE");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("LATITUDE");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("OUTCOME STATUS");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("PERSISTENT ID");
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+
+    tblBody.appendChild(row);
+
+    for (var c = 0; c < splitCategoryArray.length; c++) {
+        for (var i = 0; i < streetCrimeData.length; i++) {
+            // creating all cells    
+
+            if (splitCategoryArray[c] === streetCrimeData[i].category) {
+
+                // creates a table row
+                row = document.createElement("tr");
+
+                // Create a <td> element and a text node, make the text
+                // node the contents of the <td>, and put the <td> at
+                // the end of the table row
+                cell = document.createElement("td");
+
+                cellText = document.createTextNode(streetCrimeData[i].category);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].id);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.street.name);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.longitude);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].location.latitude);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                if (streetCrimeData[i].id % 2) {
+                    cellText = document.createTextNode("closed");
+                }
+                else {
+                    cellText = document.createTextNode("under investigation");
+                }
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                cell = document.createElement("td");
+                cellText = document.createTextNode(streetCrimeData[i].persistent_id);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+
+                // add the row to the end of the table body
+                tblBody.appendChild(row);
+
+            }
+        }
+
+        // put the <tbody> in the <table>
+        tbl.appendChild(tblBody);
+        // appends <table> into <body>
+        document.getElementById("crimeTable").appendChild(tbl);
+        //  element.appendChild(tbl);
+        // sets the border attribute of tbl to 2;
+        tbl.setAttribute("border", "2");
+
+    }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// The stopAndSearch function uses D3/DC.js to generate 3 interactive barchart from 
+// the stopandsearch.json file which was generated using CURL
+// The same index.html page is used, hence the clearPageSetHeaders initialses the page 
+// before the graphs are rendered.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+function stopAndSearch() {
+
+    clearPageSetHeaders();
+
+    queue()
+        .defer(d3.json, "assets/data/stopandsearch.json")
+        .await(makeBarGraphs);
+
+    function makeBarGraphs(error, transactionsData) {
+
+        var ndx = crossfilter(transactionsData);
+        var gender_dim = ndx.dimension(dc.pluck('gender'));
+        var total_per_gender = gender_dim.group().reduceCount();
+        dc.barChart('#per-gender')
+            .width(400)
+            .height(300)
+            .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+            .dimension(gender_dim)
+            .group(total_per_gender)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Gender")
+            .yAxis().ticks(10);
+
+        var ethnic_dim = ndx.dimension(dc.pluck('officer_defined_ethnicity'));
+        var total_per_ethnicity = ethnic_dim.group().reduceCount();
+        dc.barChart('#per-ethnicity')
+            .width(400)
+            .height(300)
+            .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+            .dimension(gender_dim)
+            .group(total_per_ethnicity)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Ethnicity")
+            .yAxis().ticks(10);
+
+        var outcome_dim = ndx.dimension(dc.pluck('outcome_linked_to_object_of_search'));
+        var total_per_outcome = outcome_dim.group().reduceCount();
+        dc.barChart('#per-success')
+            .width(400)
+            .height(300)
+            .margins({ top: 10, right: 50, bottom: 30, left: 50 })
+            .dimension(gender_dim)
+            .group(total_per_outcome)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Operation successfull")
+            .yAxis().ticks(10);
+
+        dc.renderAll();
+    }
+   
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// The clearPageSetHeaders function initialises the index.html using jQuery to empty
+// article element, crimeTable id and headings.
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function clearPageSetHeaders() {
+
+    $(document).ready(function() {
+        $("article").empty();
+    });
+
+    $(document).ready(function() {
+        $("crimeTable").empty();
+    });
+
+    $(document).ready(function() {
+        $(".msgHeader").hide();
+    });
+    
+    $(document).ready(function() {
+        $(".barcharts").show();
+    });
+
+//    document.getElementById("crimeTable").innerHTML = "";
+//    document.getElementById("chartHeader0").innerHTML = "<h3 class='bg-light'>STOP & SEARCH statistics for the current month</h3>";
+    document.getElementById("chartHeader1").innerHTML = "<h5>By Gender</h5>";
+    document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>";
+    document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>";
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// initMap is used the first time the screen is displayed or refreshed
+// by the script in the index.html file. 
+// <script defer src="https://maps.googleapis..&callback=initMap"></script>
+/////////////////////////////////////////////////////////////////////////
+
+var mapMarkers = [];
+var infoWindow;
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        zoomControl: true,
+        scaleControl: true,
+        center: {
+
+            // Sunbury
+            lat: 51.41870117,
+            lng: -0.41840180
+
+        },
+        disableDefaultUI: true
+    });
+
+    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var locations = [{ lat: 51.41870117, lng: -0.41840180 }];
+
+    var markers = locations.map(function(location, i) {
+        return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+        });
+    });
+
+    var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+// On all other occasions the buildMarkersArray will be invoke when a pieSlice is clicked 
+// via function piechartSliceSelected.
+// It builds 2 array, which are passed through to showOnMap.
+// locationArray contains the relevant LatLng values for the marker (clustermarkers)
+// and mapNames is used to displayed in the infoWindow when you hover over a label.
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function buildMarkersArray(splitCategoryArray, streetCrimeData) {
+
+    let locationArray = [];
+    let mapNames = [];
+
+    for (var c = 0; c < splitCategoryArray.length; c++) {
+
+        for (var i = 0; i < streetCrimeData.length; i++) {
+            if (streetCrimeData[i].category === splitCategoryArray[c]) {
+                locationArray.push(new google.maps.LatLng(streetCrimeData[i].location.latitude, streetCrimeData[i].location.longitude));
+                mapNames.push(streetCrimeData[i].location.street.name);
+
+            }
+        }
+        
+    }
+
+
+    var mapLabels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    // The map names will appear in the infowindow of the markers. I couldn't work out how to get the names from the 
+    // google api, so I created my own solution to make the names appear in the marker infoWindow (see showOnMap in maps.js)
+
+    //  var mapNames = [];
+
+    var mapDetails = {
+        center: {
+            lat: 51.41870117,
+            lng: -0.41840180
+        },
+        zoom: 13
+    };
+
+ 
+    showOnMap(mapDetails, locationArray, mapLabels, mapNames);
+}
+
+
+function showOnMap(mapDetails, mapLocs, mapLabels, mapNames) {
+    
+    // This function returns all the markers into "markers" which is passed to MarkerClusterer to be clustered
+
+    var map = new google.maps.Map(document.getElementById("map"), mapDetails);
+
+    var markers = mapLocs.map(function(location, i) {
+        return new google.maps.Marker({
+            position: location,
+            label: mapLabels[i % mapLabels.length],
+            title: mapNames[i]
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+
+    });
+
+
+    var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+}
