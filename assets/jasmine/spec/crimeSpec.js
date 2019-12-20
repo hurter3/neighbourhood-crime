@@ -1,8 +1,3 @@
-
-
-
-
-    
 describe("Updates the crime_outcome result", function() {
     // Specs are defined by calling the global Jasmine function it
     it("should exist", function() {
@@ -18,7 +13,7 @@ describe("Updates the crime_outcome result", function() {
     });
         
         
-    it("should return CLOSED from updateOutcome when the crimeId is EVEN = updateOutcome(22)", function() {
+    it("should return UNDER INVESTIGATION from updateOutcome when the crimeId is EVEN = updateOutcome(22)", function() {
         var result = updateOutcome(22)
         expect(result).toBe("under investigation");
     });
