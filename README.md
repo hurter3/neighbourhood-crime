@@ -1,11 +1,11 @@
 # Neighbourhood-crime
 
-Stream Two Project: Interactive Front-End - Code Institue
+Stream Two Project: Interactive Front-End - Code Institute.
 
 
 ## Purpose.
 
-Unfortunately crime is increasing in our communities and the public needed to be enlighted 
+Crime is increasing in our communities and the public needed to be enlighted 
 to the account of incidents in their neighbourhood. The best way to achieve this was by a visual
 representation through charts and map locations to make it feel close to home.
 
@@ -17,7 +17,7 @@ representation through charts and map locations to make it feel close to home.
   - The elements represent the skeleton with ID's and CLASSES so that JavaScript or jQuery where able to target them as desired.    
 - Bootstrap
   - Used the Grid structure and styling classes provided to build the basic layout and form a platform.
-- CSS
+- CSS3
   - Expanded the style.css file to enhance the structure that was built using Bootstrap.
 - JavaScript
   - Collapsible Navbar and the main body of the project to manipulate the DOM.
@@ -27,6 +27,8 @@ representation through charts and map locations to make it feel close to home.
   - Has been used to produce the pie and barcharts.
 - W3C Validator.
   - To highlight HTML5 hiccups.
+- JSHint.
+  - To validate the JS code.
 
 
 ## Features
@@ -36,12 +38,13 @@ representation through charts and map locations to make it feel close to home.
  To the right is a google map of the local area.
  As the user selects 1 or more piechart slices (being a crime category) the individual incidents are listed in a data table below.
  All selected categories will be listed in the "selected:" title above the pieChart.
- If a previosly selected slice is clicked for the second time then this is removed from the group.
+ If a previous selected slice is clicked for the second time then this is removed from the group.
  All relevant incidents will be reflected on the googles map via markers or cluster markers.
 
- On the navbar there is a Stop and Search link that will clear down the entire front page (pieChart, map) and display 3 interactive bar charts with Stop and Search activity.
+ On the navbar there is a 'Stop and Search' tab that will clear down the entire front page (pieChart, map) and display 3 interactive bar charts with Stop and Search activity.
 
-
+ There is ONE index.html page which is manipulated to appear as two pages and two JavaScripts (main.js & maps.js) to keep the 
+ funtionality seperate.
 
 ## Testing.
 
@@ -94,9 +97,15 @@ by means of target="_blank" to ensure the current website is not lost.
 
 - And repeat just to make sure all is good.
 
+####
+
+- Tested different media sizes to ensure the elements dropped down into vertical alignment and introduced overflow CSS to control the width of the table otherwise the navbar disapperared off the screen.
+- Tested different internet platforms.
+- 
 #### Code Sanity
 
-- Used W3C Validator to ensure HTML5 was good. Unfortunately there was 1 error on a script 'error bad value anonymous for attribute crossorigin on element script'. I could not resolve this and the CDN was obtained from code.jquery.com
+- Used W3C Validator for HTML5 and JSHint to ensure there were no obvious issues with the code.
+- Unfortunately there was 1 error on a script 'error bad value anonymous for attribute crossorigin on element script'. I could not resolve this and the CDN was obtained from code.jquery.com
 - In DEV tools I noticed a cookie warning and resource that could not be loaded but they looked unrelated but obviously not 
   - A cookie associated with a cross-site resource at http://google.com/ was set without the `SameSite` attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with `SameSite=None` and `Secure`. You can review cookies in developer tools under Application>Storage>Cookies and see more details at https://www.chromestatus.com/feature/5088147346030592 and https://www.chromestatus.com/feature/5633521622188032.
   -  /favicon.ico:1 Failed to load resource: the server responded with a status of 503 ()
@@ -126,12 +135,11 @@ Bootstrap ,W3Schools, DC.JS and stackoverflow were a great resource.
 Mentor advise from Aaron Sinnott
 Tutor group take the credit for amazing advise after I depleated the Slack resources.
 
-## Features Left to Implement
-Enhancements to expand the website with a dropdown selection list of other surrounding areas and 
-a monthly selection list so the user can explore areas / time frames of their choice.
+#### Future Enhancements.
+Expand the website for the entire UK and Ireland with 2 dropdown selection lists so the user
+can select a neighbourhood and time period to explore.
 
-
-I had already tested further API functoinality but it did not fit in with the current SCOPE of the project..
+I had already tested further API functionality but it did not fit in with the current SCOPE of the project..
 
 
 HTML5
