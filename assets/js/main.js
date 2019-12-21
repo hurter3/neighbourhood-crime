@@ -321,7 +321,6 @@ function clearPageSetHeaders() {
     });
 
     document.getElementById("crimeTable").innerHTML = "";
-//    document.getElementById("chartHeader0").innerHTML = "<h3 class='bg-light'>STOP & SEARCH statistics for the current month</h3>";
     document.getElementById("chartHeader1").innerHTML = "<h5>By Gender</h5>";
     document.getElementById("chartHeader2").innerHTML = "<h5>By Success</h5>";
     document.getElementById("chartHeader3").innerHTML = "<h5>By Ethnicity</h5>";
